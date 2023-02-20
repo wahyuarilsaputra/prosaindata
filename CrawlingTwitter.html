@@ -51,7 +51,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Content with notebooks" href="notebooks.html" />
     <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -116,16 +115,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Tugas 1 : Crawling Data Twitter
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown-notebooks.html">
-   Notebooks with MyST Markdown
   </a>
  </li>
 </ul>
@@ -346,17 +335,26 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Requirement already satisfied: snscrape in /usr/local/lib/python3.8/dist-packages (0.5.0.20230113)
-Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.6.3)
-Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting snscrape
+  Downloading snscrape-0.5.0.20230113-py3-none-any.whl (69 kB)
+?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/69.2 KB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">69.2/69.2 KB</span> <span class=" -Color -Color-Red">3.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hRequirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
 Requirement already satisfied: requests[socks] in /usr/local/lib/python3.8/dist-packages (from snscrape) (2.25.1)
-Requirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
+Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
 Requirement already satisfied: filelock in /usr/local/lib/python3.8/dist-packages (from snscrape) (3.9.0)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.24.3)
+Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.6.3)
 Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (4.0.0)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.24.3)
 Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2022.12.7)
 Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.7.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: snscrape
+Successfully installed snscrape-0.5.0.20230113
 </pre></div>
 </div>
 </div>
@@ -529,7 +527,7 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-3edb1f97-57a8-474e-bd25-09022376f1da">
+  <div id="df-fcfc8b67-62d3-4ade-95df-2f62df64a744">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -557,33 +555,33 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
   <tbody>
     <tr>
       <th>0</th>
-      <td>Muhaimi91168531</td>
-      <td>@tetehamira Yuk</td>
+      <td>arek0218</td>
+      <td>Peringati Isra Miraj, Cak Imin Doakan Umat Isl...</td>
       <td></td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Muhaimi91168531</td>
-      <td>@Tantebilahott @bundariaria Nah iya yaa</td>
+      <td>AndiniSesilia</td>
+      <td>“Sampai sekarang Prabowo sendiri masih belum t...</td>
       <td></td>
     </tr>
     <tr>
       <th>2</th>
-      <td>cakimiNOW</td>
-      <td>https://t.co/q4LBiE7xRL</td>
-      <td>Indonesia</td>
+      <td>IsmailMangngaga</td>
+      <td>Peringati Isra Miraj, Cak Imin Doakan Umat Isl...</td>
+      <td>Sulawesi Selatan, Indonesia</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>cakimiNOW</td>
-      <td>Semalam memperingati Isra’ mi’raj bersama Majl...</td>
-      <td>Indonesia</td>
+      <td>Emerald72063957</td>
+      <td>@detikcom Semoga segera deklarasi, kalau masih...</td>
+      <td></td>
     </tr>
     <tr>
       <th>4</th>
-      <td>cakimiNOW</td>
-      <td>@MuhammadiyinGL Bersama IMMawan ngapalin sang ...</td>
-      <td>Indonesia</td>
+      <td>ahmadhellishfau</td>
+      <td>#JokowiCakImin #JoinKepri2019 #NasionalisRelig...</td>
+      <td></td>
     </tr>
     <tr>
       <th>...</th>
@@ -592,40 +590,40 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
       <td>...</td>
     </tr>
     <tr>
-      <th>2982</th>
+      <th>1496</th>
+      <td>achmadsarnuji</td>
+      <td>Terimakasih Gus Muhaimin\n# Cak Imin</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1497</th>
+      <td>OposisiCerdas</td>
+      <td>Sulit Raih Kemenangan, Prabowo Sedang Kalkulas...</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1498</th>
+      <td>NdaraKaji</td>
+      <td>@txtdrMagelang @iya_hanaa Admin numpak VX, Cak...</td>
+      <td>Denpasar Selatan, Indonesia</td>
+    </tr>
+    <tr>
+      <th>1499</th>
+      <td>YandraD31</td>
+      <td>@AndiSinulingga Bertempur lah Dan kita saksika...</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1500</th>
       <td>tio_richardo</td>
       <td>Tiati ndan nanti diserang bajer Cak Imin 🤭🤭🤣🤣</td>
       <td></td>
     </tr>
-    <tr>
-      <th>2983</th>
-      <td>tio_richardo</td>
-      <td>Kirain PKB Cak Imin 🤣🤣🤣🤭🤭</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2984</th>
-      <td>KompasTV</td>
-      <td>Pagi Ini Cak Imin Bakal Kongkow dengan Airlang...</td>
-      <td>Indonesia</td>
-    </tr>
-    <tr>
-      <th>2985</th>
-      <td>Off1Lelanurlela</td>
-      <td>SejarahPKB\n#DPPPKB\n#cakimin\n#Syaefulhuda\n#...</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>2986</th>
-      <td>h_koeswadi</td>
-      <td>@mardigu024 Mknya ada yg panik Anies jd capres...</td>
-      <td></td>
-    </tr>
   </tbody>
 </table>
-<p>2987 rows × 3 columns</p>
+<p>1501 rows × 3 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-3edb1f97-57a8-474e-bd25-09022376f1da')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-fcfc8b67-62d3-4ade-95df-2f62df64a744')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -676,12 +674,12 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 
       <script>
         const buttonEl =
-          document.querySelector('#df-3edb1f97-57a8-474e-bd25-09022376f1da button.colab-df-convert');
+          document.querySelector('#df-fcfc8b67-62d3-4ade-95df-2f62df64a744 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-3edb1f97-57a8-474e-bd25-09022376f1da');
+          const element = document.querySelector('#df-fcfc8b67-62d3-4ade-95df-2f62df64a744');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -704,7 +702,7 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_tweet</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;crawling cak imin.csv&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_tweet</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;crawling cak imin.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -744,13 +742,6 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Welcome to your Jupyter Book</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="notebooks.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Content with notebooks</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
