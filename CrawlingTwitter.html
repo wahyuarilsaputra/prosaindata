@@ -335,26 +335,17 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting snscrape
-  Downloading snscrape-0.5.0.20230113-py3-none-any.whl (69 kB)
-?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/69.2 KB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">69.2/69.2 KB</span> <span class=" -Color -Color-Red">3.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hRequirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
-Requirement already satisfied: requests[socks] in /usr/local/lib/python3.8/dist-packages (from snscrape) (2.25.1)
-Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
-Requirement already satisfied: filelock in /usr/local/lib/python3.8/dist-packages (from snscrape) (3.9.0)
+Requirement already satisfied: snscrape in /usr/local/lib/python3.8/dist-packages (0.5.0.20230113)
 Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.6.3)
+Requirement already satisfied: requests[socks] in /usr/local/lib/python3.8/dist-packages (from snscrape) (2.25.1)
+Requirement already satisfied: filelock in /usr/local/lib/python3.8/dist-packages (from snscrape) (3.9.0)
+Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
+Requirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
 Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (4.0.0)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.24.3)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2022.12.7)
 Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.7.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: snscrape
-Successfully installed snscrape-0.5.0.20230113
 </pre></div>
 </div>
 </div>
@@ -369,25 +360,45 @@ Successfully installed snscrape-0.5.0.20230113
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#manampung data dalam array</span>
-<span class="n">tweet_list</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #manampung data dalam array</span>
+<span class="c1"># tweet_list = []</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="s1">&#39;Cak Imin since:2018-01-01 until:2023-02-20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">()):</span>
-  <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">1500</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array</span>
+<span class="c1"># for i,tweet in enumerate(sntwitter.TwitterSearchScraper(&#39;Cak Imin since:2018-01-01 until:2023-02-20&#39;).get_items()):</span>
+<span class="c1">#   if i&gt;1500:</span>
+<span class="c1">#     break</span>
+<span class="c1">#   tweet_list.append([tweet.user.username,tweet.content,tweet.user.location])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;(cak imin) until:2023-02-20 since:2022-01-01&quot;</span>
+<span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">limit</span> <span class="o">=</span> <span class="mi">500</span>
+
+
+<span class="c1"># tweets_list1 = []</span>
+<span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">():</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span><span class="o">==</span><span class="n">limit</span><span class="p">:</span>
     <span class="k">break</span>
-  <span class="n">tweet_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">location</span><span class="p">])</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tweet</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">location</span><span class="p">])</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="s1">&#39;Tweet&#39;</span><span class="p">,</span> <span class="s1">&#39;lokasi&#39;</span><span class="p">])</span>
+<span class="c1"># print(df)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-4-e0426a6a3906&gt;:5: FutureWarning: content is deprecated, use rawContent instead
-  tweet_list.append([tweet.user.username,tweet.content,tweet.user.location])
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-2eae74519d89&gt;:11: FutureWarning: content is deprecated, use rawContent instead
+  tweets.append([tweet.date, tweet.user.username, tweet.content, tweet.user.location])
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span>Traceback (most recent call last)
@@ -401,12 +412,12 @@ Successfully installed snscrape-0.5.0.20230113
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="n">e0426a6a3906</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="s1">&#39;Cak Imin since:2018-01-01 until:2023-02-20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">()):</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>   <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">1500</span><span class="p">:</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">break</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>   <span class="n">tweet_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">location</span><span class="p">])</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">5</span><span class="o">-</span><span class="mi">2</span><span class="n">eae74519d89</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># tweets_list1 = []</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">():</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweets</span><span class="p">)</span><span class="o">==</span><span class="n">limit</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="k">break</span>
 
 <span class="nn">/usr/local/lib/python3.8/dist-packages/snscrape/modules/twitter.py</span> in <span class="ni">get_items</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">   </span><span class="mi">1544</span>                         <span class="k">del</span> <span class="n">paginationParams</span><span class="p">[</span><span class="s1">&#39;tweet_search_mode&#39;</span><span class="p">]</span>
@@ -520,8 +531,8 @@ Successfully installed snscrape-0.5.0.20230113
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_tweet</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tweet_list</span><span class="p">,</span><span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;Username&#39;</span><span class="p">,</span><span class="s1">&#39;Konten&#39;</span><span class="p">,</span><span class="s1">&#39;Lokasi&#39;</span><span class="p">])</span>
-<span class="n">frame_tweet</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># frame_tweet = pd.DataFrame(tweet_list,columns =[&#39;Username&#39;,&#39;Konten&#39;,&#39;Lokasi&#39;])</span>
+<span class="c1"># frame_tweet</span>
 </pre></div>
 </div>
 </div>
@@ -702,7 +713,7 @@ Successfully installed snscrape-0.5.0.20230113
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_tweet</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;crawling cak imin.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frame_tweet</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;crawling cak imin.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

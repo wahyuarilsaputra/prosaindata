@@ -32,10 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-#mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array
-for i,tweet in enumerate(sntwitter.TwitterSearchScraper('Cak Imin since:2018-01-01 until:2023-02-20').get_items()):
-  if i>1500:
-    break
-  tweet_list.append([tweet.user.username,tweet.content,tweet.user.location])
+['query = "(cak imin) until:2023-02-20 since:2022-01-01"', 'tweets = []', 'limit = 500', '', '']
+...
+['  else:', '    tweets.append([tweet.date, tweet.user.username, tweet.content, tweet.user.location])', '', "df = pd.DataFrame(tweets, columns=['Date', 'User', 'Tweet', 'lokasi'])", '# print(df)']
 -------------------
 
