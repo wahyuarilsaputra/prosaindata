@@ -348,14 +348,14 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
 Requirement already satisfied: snscrape in /usr/local/lib/python3.8/dist-packages (0.5.0.20230113)
-Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
-Requirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
 Requirement already satisfied: filelock in /usr/local/lib/python3.8/dist-packages (from snscrape) (3.9.0)
-Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.6.3)
+Requirement already satisfied: lxml in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.9.2)
 Requirement already satisfied: requests[socks] in /usr/local/lib/python3.8/dist-packages (from snscrape) (2.25.1)
+Requirement already satisfied: beautifulsoup4 in /usr/local/lib/python3.8/dist-packages (from snscrape) (4.6.3)
+Requirement already satisfied: pytz in /usr/local/lib/python3.8/dist-packages (from snscrape) (2022.7.1)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2022.12.7)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.24.3)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (2.10)
 Requirement already satisfied: chardet&lt;5,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (4.0.0)
 Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/python3.8/dist-packages (from requests[socks]-&gt;snscrape) (1.7.1)
 </pre></div>
@@ -380,7 +380,7 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="s1">&#39;anisbaswedan since:2022-01-01 until:2023-02-20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">()):</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">tweet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sntwitter</span><span class="o">.</span><span class="n">TwitterSearchScraper</span><span class="p">(</span><span class="s1">&#39;muhaiminiskandar since:2022-01-01 until:2023-02-20&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_items</span><span class="p">()):</span>
   <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">500</span><span class="p">:</span>
     <span class="k">break</span>
   <span class="n">tweet_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">content</span><span class="p">,</span><span class="n">tweet</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">location</span><span class="p">])</span>
@@ -388,7 +388,7 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-5799761e7bfd&gt;:5: FutureWarning: content is deprecated, use rawContent instead
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-5c4eb6906496&gt;:5: FutureWarning: content is deprecated, use rawContent instead
   tweet_list.append([tweet.user.username,tweet.content,tweet.user.location])
 </pre></div>
 </div>
@@ -403,7 +403,7 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-584b1dc7-2bea-438a-8033-f7e373af7db9">
+  <div id="df-0727e720-e6ad-441c-852f-72e8b5aa1df0">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -431,33 +431,33 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
   <tbody>
     <tr>
       <th>0</th>
-      <td>Iman4083</td>
-      <td>Bagaimana menurut kamu jika itu terjadi pada k...</td>
-      <td></td>
+      <td>SSulfianto</td>
+      <td>#MUHAIMINISKANDAR https://t.co/y9nIv2F2g6</td>
+      <td>Desa Randomayang</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>LudyAgus</td>
-      <td>Jangan iri ya ,antusias banget Anis di sambut ...</td>
+      <td>LamonganPkb</td>
+      <td>Seberapa Kuat Elektabilitas PKB Partai Pengusu...</td>
       <td></td>
     </tr>
     <tr>
       <th>2</th>
-      <td>marten_tnaob</td>
-      <td>@aniesbaswedan @NasDem Ngurus Jakarta aja gak ...</td>
-      <td></td>
+      <td>Abbasyahrir</td>
+      <td>#MuhaiminIskandar</td>
+      <td>Kelurahan Tondo</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>marten_tnaob</td>
-      <td>@aniesbaswedan @NasDem @PDemokrat @PKSejahtera...</td>
-      <td></td>
+      <td>Abbasyahrir</td>
+      <td>#MuhaiminIskandar https://t.co/ap0lGAPGNQ</td>
+      <td>Kelurahan Tondo</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>DANDY14632756</td>
-      <td>@Mdy_Asmara1701 @AnisBaswedan para Buzzerrp Me...</td>
-      <td></td>
+      <td>Kang_1H54N_9</td>
+      <td>#GusMuhaimin\n#MuhaiminIskandar\n#PKB\n#Nomor ...</td>
+      <td>Kota Banjar Jawa Barat</td>
     </tr>
     <tr>
       <th>...</th>
@@ -467,39 +467,39 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
     </tr>
     <tr>
       <th>496</th>
-      <td>Murdian09309315</td>
-      <td>@Siantar72 @aniesbaswedan @mahasiswigenz @musn...</td>
-      <td></td>
+      <td>muhamma77670402</td>
+      <td>Saksikan Tasyakuran Satu Abad NU\n🗓️ Ahad 5 Fe...</td>
+      <td>Aceh Tenggara, Nangro Aceh Dar</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>caniazhar590</td>
-      <td>Politisi dungu.. baper nyalah-nyalahkan @anisb...</td>
-      <td>Sumatera Utara, Indonesia</td>
+      <td>Dedikwoe</td>
+      <td>Saksikan Tasyakuran Satu Abad NU dengan rangka...</td>
+      <td></td>
     </tr>
     <tr>
       <th>498</th>
-      <td>caniazhar590</td>
-      <td>@PutraErlangga95 @kanksetya Kata pengamat Hend...</td>
-      <td>Sumatera Utara, Indonesia</td>
+      <td>terkinidotid</td>
+      <td>Muhaimin Usulkan Tiadakan Jabatan Gubernur, Ti...</td>
+      <td>Makassar, Indonesia</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>serba_receh</td>
-      <td>@Opa_Lagi_Jalan2 lho.. apa gk ada pujian utk @...</td>
-      <td></td>
+      <td>PKBKOTAKEDIRI</td>
+      <td>Saksikan Tasyakuran Satu Abad NU\n1344 - 1444 ...</td>
+      <td>Kota Kediri, Indonesia</td>
     </tr>
     <tr>
       <th>500</th>
-      <td>knmaneges</td>
-      <td>Anis Baswedan &amp;amp; Gibran Rakabuming Raka\n(C...</td>
-      <td></td>
+      <td>PkbCianjur</td>
+      <td>Saksikan Tasyakuran Satu Abad NU\n1344 - 1444 ...</td>
+      <td>Cianjur, Indonesia</td>
     </tr>
   </tbody>
 </table>
 <p>501 rows × 3 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-584b1dc7-2bea-438a-8033-f7e373af7db9')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0727e720-e6ad-441c-852f-72e8b5aa1df0')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
 
@@ -550,12 +550,12 @@ Requirement already satisfied: PySocks!=1.5.7,&gt;=1.5.6 in /usr/local/lib/pytho
 
       <script>
         const buttonEl =
-          document.querySelector('#df-584b1dc7-2bea-438a-8033-f7e373af7db9 button.colab-df-convert');
+          document.querySelector('#df-0727e720-e6ad-441c-852f-72e8b5aa1df0 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-584b1dc7-2bea-438a-8033-f7e373af7db9');
+          const element = document.querySelector('#df-0727e720-e6ad-441c-852f-72e8b5aa1df0');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
