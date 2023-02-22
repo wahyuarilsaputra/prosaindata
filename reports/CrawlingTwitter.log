@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['query = "(cak imin) until:2023-02-20 since:2022-01-01"', 'tweets = []', 'limit = 500', '', 'for tweet in sntwitter.TwitterSearchScraper(query).get_items():']
+["pencarian = 'snbp'", "cari = pencarian.replace(' ','+')", "tglAwal = '18/01/2022'", "tglAkhir = '18/02/2023'", 'header={']
 ...
-['    break', '  else:', '    tweets.append([tweet.date, tweet.user.username, tweet.content, tweet.user.location])', '', "df = pd.DataFrame(tweets, columns=['Date', 'User', 'Tweet', 'lokasi'])"]
+['    for x in konten:', "      isi = x.find_all('p')", '      y = [y.text for y in isi]', "      fixkonten = ''.join(y).replace('\\n','').replace('ADVERTISEMENT','').replace('SCROLL TO RESUME CONTENT','')", '      berita_list.append([judul,fixkonten])']
 -------------------
 
