@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome to your Jupyter Book &#8212; Proyek Saint Data B</title>
+    <title>Tugas 2 : Pipeline &#8212; Proyek Saint Data B</title>
   
   
   
@@ -60,10 +60,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Pipeline';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tugas 1 : Crawling Data" href="CrawlingTwitter.html" />
+    <link rel="prev" title="Tugas 1 : Crawling Data" href="CrawlingTwitter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -129,7 +129,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -148,15 +148,15 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Welcome to your Jupyter Book
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="CrawlingTwitter.html">Tugas 1 : Crawling Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Tugas 2 : Pipeline</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 2 : Pipeline</a></li>
 </ul>
 
     </div>
@@ -228,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPipeline.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -258,7 +258,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/Pipeline.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -268,7 +268,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -338,7 +338,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to your Jupyter Book</h1>
+    <h1>Tugas 2 : Pipeline</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -352,17 +352,238 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Permalink to this heading">#</a></h1>
-<p>Nama    : Wahyu Aril Saputra</p>
-<p>NIM     : 200411100055</p>
-<p>Kelas   : Proyek Saint Data B</p>
-<p>Check out the content pages bundled with this sample book to see more.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="CrawlingTwitter.html">Tugas 1 : Crawling Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Tugas 2 : Pipeline</a></li>
-</ul>
+  <div class="section" id="tugas-2-pipeline">
+<h1>Tugas 2 : Pipeline<a class="headerlink" href="#tugas-2-pipeline" title="Permalink to this heading">#</a></h1>
+<p>#Mengambil data iris dari berbagai sql</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<span class="c1"># import psycopg2</span>
+<span class="c1"># import mysql.connector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Dari PostgreeSQL Local
+Mengambil data dari postgreesql menggunakan psycopg2</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = psycopg2.connect(</span>
+<span class="c1">#     database=&quot;prosaindata{200411100055}&quot;,</span>
+<span class="c1">#     user=&quot;postgres&quot;,</span>
+<span class="c1">#     password=&quot;1234&quot;,</span>
+<span class="c1">#     host=&quot;localhost&quot;,</span>
+<span class="c1">#     port=&quot;5432&quot;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># cur = conn.cursor()</span>
+
+<span class="c1"># cur.execute(&quot;SELECT sepallength FROM data_iris&quot;)</span>
+
+<span class="c1"># Postgree_Lokal = cur.fetchall()</span>
+
+<span class="c1"># Postgree_Lokal=pd.DataFrame(Postgree_Lokal,columns=[&#39;SepalLength&#39;])</span>
+<span class="c1"># Postgree_Lokal.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Dari PostgreeSQL Local
+Mengambil data dari PostgreeSQL Elephant menggunakan psycopg2</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = psycopg2.connect(</span>
+<span class="c1">#     database=&quot;qjwtilzl&quot;,</span>
+<span class="c1">#     user=&quot;qjwtilzl&quot;,</span>
+<span class="c1">#     password=&quot;qH0HpAO3lbVcyQG3rDYYaSLkN2yLTuxc&quot;,</span>
+<span class="c1">#     host=&quot;satao.db.elephantsql.com&quot;,</span>
+<span class="c1">#     port=&quot;5432&quot;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># cur = conn.cursor()</span>
+
+<span class="c1"># cur.execute(&quot;SELECT sepalwidth,petallength FROM data_iris&quot;)</span>
+
+<span class="c1"># Postgree_Elephant = cur.fetchall()</span>
+<span class="c1"># Postgree_Elephant=pd.DataFrame(Postgree_Elephant,columns=[&#39;SepalWidth&#39;,&#39;PetalLength&#39;])</span>
+<span class="c1"># Postgree_Elephant.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Dari Mysql Server
+Mengambil data dari Mysql Server menggunakan mysql.connector</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = mysql.connector.connect(</span>
+<span class="c1">#     host=&quot;localhost&quot;,</span>
+<span class="c1">#     user=&quot;root&quot;,</span>
+<span class="c1">#     password=&quot;&quot;,</span>
+<span class="c1">#     database=&quot;prosaindata{200411100055}&quot;</span>
+<span class="c1"># )</span>
+
+<span class="c1"># mycursor = conn.cursor()</span>
+
+<span class="c1"># mycursor.execute(&quot;SELECT petalwidth,class FROM data_iris;&quot;)</span>
+
+<span class="c1"># myresult = mycursor.fetchall()</span>
+
+<span class="c1"># # plot the data to data frame</span>
+<span class="c1"># Mysql = pd.DataFrame(myresult, columns=[&#39;PetalWidth&#39;,&#39;Class&#39;])</span>
+<span class="c1"># Mysql.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Menggabungkan Data yang telah diambil menjadi satu data frame menggunakan concat</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df = pd.concat([Postgree_Lokal, Postgree_Elephant, Mysql], axis=1)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Import data ke CSV</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Postgree_Lokal.to_csv(&#39;Postgree_Lokal.csv&#39;, index=False)</span>
+<span class="c1"># Postgree_Elephant.to_csv(&#39;Postgree_Elephant.csv&#39;, index=False)</span>
+<span class="c1"># Mysql.to_csv(&#39;Mysql.csv&#39;, index=False)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Import CSV Ke Pipeline Orchest</p>
+<p>#import data ke dalam pipeline</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># from sklearn import datasets</span>
+
+<span class="c1"># Postgree_Lokal=pd.read_csv(&#39;datasets/Postgree_Lokal.csv&#39;)</span>
+<span class="c1"># Postgree_Elephant=pd.read_csv(&#39;datasets/Postgree_Elephant.csv&#39;)</span>
+<span class="c1"># Mysql=pd.read_csv(&#39;datasets/Mysql.csv&#39;)</span>
+<span class="c1"># data = pd.concat([Postgree_Lokal, Postgree_Elephant, Mysql], axis=1)</span>
+
+<span class="c1"># df_data = data.iloc[:, :-1]</span>
+<span class="c1"># df_target = data.iloc[:, 4]</span>
+<span class="c1"># print(&quot;Outputting converted &quot;)</span>
+<span class="c1"># orchest.output((df_data, df_target), name=&quot;data&quot;)</span>
+<span class="c1"># print(&quot;Success!&quot;)</span>
+
+<span class="c1"># data.head()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Split data menggunakan min max scaler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
+<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<span class="c1"># from sklearn.pipeline import Pipeline</span>
+<span class="c1"># # from sklearn.preprocessing import MinMaxScaler</span>
+<span class="c1"># data = orchest.get_inputs() </span>
+<span class="c1"># X, y = data[&quot;data&quot;]</span>
+<span class="c1"># # scaler = MinMaxScaler()</span>
+<span class="c1"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=0)</span>
+<span class="c1"># # X_train = scaler.fit_transform(X_train)</span>
+<span class="c1"># # X_test = scaler.transform(X_test)</span>
+<span class="c1"># orchest.output((X_train, y_train, X_test, y_test), name=&quot;training_data&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#KNN Model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># import orchest</span>
+<span class="c1"># from sklearn.neighbors import KNeighborsClassifier</span>
+<span class="c1"># from sklearn.metrics import mean_squared_error</span>
+<span class="c1"># # Retrieve the data from the previous step.</span>
+<span class="c1"># data = orchest.get_inputs()</span>
+<span class="c1"># X_train, y_train, X_test, y_test = data[&quot;training_data&quot;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = KNeighborsClassifier(n_neighbors = 15)</span>
+<span class="c1"># model.fit(X_train, y_train)</span>
+<span class="c1"># from sklearn.metrics import accuracy_score</span>
+<span class="c1"># y_pred = model.predict(X_test)</span>
+<span class="c1"># test_accracy = accuracy_score(y_test, y_pred)</span>
+<span class="c1"># orchest.output(test_accracy, name=&quot;KNeighborsClassifier&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Decision Tree Model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># import orchest</span>
+<span class="c1"># from sklearn.tree import DecisionTreeClassifier</span>
+<span class="c1"># from sklearn.metrics import mean_squared_error</span>
+<span class="c1"># # Retrieve the data from the previous step.</span>
+<span class="c1"># data = orchest.get_inputs()</span>
+<span class="c1"># X_train, y_train, X_test, y_test = data[&quot;training_data&quot;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = DecisionTreeClassifier()</span>
+<span class="c1"># model.fit(X_train, y_train)</span>
+<span class="c1"># from sklearn.metrics import accuracy_score</span>
+<span class="c1"># y_pred = model.predict(X_test)</span>
+<span class="c1"># test_accracy = accuracy_score(y_test, y_pred)</span>
+<span class="c1"># orchest.output(test_accracy, name=&quot;decision-tree-accuracy&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Naive Bayes Model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
+<span class="c1"># import orchest</span>
+<span class="c1"># from sklearn.naive_bayes import GaussianNB</span>
+<span class="c1"># from sklearn.metrics import mean_squared_error</span>
+<span class="c1"># # Retrieve the data from the previous step.</span>
+<span class="c1"># data = orchest.get_inputs()</span>
+<span class="c1"># X_train, y_train, X_test, y_test = data[&quot;training_data&quot;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model = GaussianNB()</span>
+<span class="c1"># model.fit(X_train, y_train)</span>
+<span class="c1"># from sklearn.metrics import accuracy_score</span>
+<span class="c1"># y_pred = model.predict(X_test)</span>
+<span class="c1"># test_accracy = accuracy_score(y_test, y_pred)</span>
+<span class="c1"># orchest.output(test_accracy, name=&quot;GaussianNB&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Hasil Akurasi dari ketiga Model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
+<span class="c1"># data = orchest.get_inputs()</span>
+<span class="c1"># for name, value in data.items():</span>
+<span class="c1">#     if name != &quot;unnamed&quot;:</span>
+<span class="c1">#         print(f&quot;\n{name:30} {value}&quot;)</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -394,14 +615,14 @@ document.write(`
                 <footer class="bd-footer-article">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="CrawlingTwitter.html"
-       title="next page">
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Tugas 1 : Crawling Data</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
