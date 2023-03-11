@@ -139,8 +139,8 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/robitt.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/robitt.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
@@ -352,44 +352,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="section" id="tugas-2-pipeline">
+  <div class="tex2jax_ignore mathjax_ignore section" id="tugas-2-pipeline">
 <h1>Tugas 2 : Pipeline<a class="headerlink" href="#tugas-2-pipeline" title="Permalink to this heading">#</a></h1>
-<p>#Mengambil data iris dari berbagai sql</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pandas as pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import mysql.connector</span>
+<span class="c1"># import pandas as pd</span>
+<span class="c1"># import orchest</span>
 <span class="c1"># import psycopg2</span>
-<span class="c1"># import mysql.connector</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>#Dari PostgreeSQL Local
-Mengambil data dari postgreesql menggunakan psycopg2</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = psycopg2.connect(</span>
-<span class="c1">#     database=&quot;prosaindata{200411100055}&quot;,</span>
-<span class="c1">#     user=&quot;postgres&quot;,</span>
-<span class="c1">#     password=&quot;1234&quot;,</span>
-<span class="c1">#     host=&quot;localhost&quot;,</span>
-<span class="c1">#     port=&quot;5432&quot;</span>
-<span class="c1"># )</span>
-
-<span class="c1"># cur = conn.cursor()</span>
-
-<span class="c1"># cur.execute(&quot;SELECT sepallength FROM data_iris&quot;)</span>
-
-<span class="c1"># Postgree_Lokal = cur.fetchall()</span>
-
-<span class="c1"># Postgree_Lokal=pd.DataFrame(Postgree_Lokal,columns=[&#39;SepalLength&#39;])</span>
-<span class="c1"># Postgree_Lokal.head()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>#Dari PostgreeSQL Local
-Mengambil data dari PostgreeSQL Elephant menggunakan psycopg2</p>
+<p>##Mengambil data iris dari berbagai sql</p>
+<p>###Dari PostgreeSQL
+###Mengambil data dari postgreesql menggunakan psycopg2</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = psycopg2.connect(</span>
@@ -402,100 +379,118 @@ Mengambil data dari PostgreeSQL Elephant menggunakan psycopg2</p>
 
 <span class="c1"># cur = conn.cursor()</span>
 
-<span class="c1"># cur.execute(&quot;SELECT sepalwidth,petallength FROM data_iris&quot;)</span>
+<span class="c1"># cur.execute(&quot;SELECT sepallength,sepalwidth FROM data_iris&quot;)</span>
 
 <span class="c1"># Postgree_Elephant = cur.fetchall()</span>
-<span class="c1"># Postgree_Elephant=pd.DataFrame(Postgree_Elephant,columns=[&#39;SepalWidth&#39;,&#39;PetalLength&#39;])</span>
+<span class="c1"># Postgree_Elephant=pd.DataFrame(Postgree_Elephant,columns=[&#39;SepalLength&#39;,&#39;SepalWidth&#39;])</span>
+<span class="c1"># orchest.output(Postgree_Elephant,name=&quot;Postgree&quot;)</span>
 <span class="c1"># Postgree_Elephant.head()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>#Dari Mysql Server
-Mengambil data dari Mysql Server menggunakan mysql.connector</p>
+<p>###Dari Mysql Server
+###Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = mysql.connector.connect(</span>
-<span class="c1">#     host=&quot;localhost&quot;,</span>
-<span class="c1">#     user=&quot;root&quot;,</span>
-<span class="c1">#     password=&quot;&quot;,</span>
-<span class="c1">#     database=&quot;prosaindata{200411100055}&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mydb = mysql.connector.connect(</span>
+<span class="c1">#   host=&quot;sql12.freesqldatabase.com&quot;,</span>
+<span class="c1">#   user=&quot; sql12604622&quot;,</span>
+<span class="c1">#   password=&quot;WXSdvIJYQ1&quot;,</span>
+<span class="c1">#   database=&quot;sql12604622&quot;</span>
 <span class="c1"># )</span>
-
-<span class="c1"># mycursor = conn.cursor()</span>
-
-<span class="c1"># mycursor.execute(&quot;SELECT petalwidth,class FROM data_iris;&quot;)</span>
-
+<span class="c1"># mycursor = mydb.cursor()</span>
+<span class="c1"># mycursor.execute(&quot;SELECT petallength,petalwidth FROM data_iris&quot;)</span>
 <span class="c1"># myresult = mycursor.fetchall()</span>
-
-<span class="c1"># # plot the data to data frame</span>
-<span class="c1"># Mysql = pd.DataFrame(myresult, columns=[&#39;PetalWidth&#39;,&#39;Class&#39;])</span>
+<span class="c1"># Mysql = pd.DataFrame(myresult, columns=[&#39;PetalLength&#39;,&#39;PetalWidth&#39;])</span>
+<span class="c1"># orchest.output(Mysql,name=&quot;Mysql&quot;)</span>
 <span class="c1"># Mysql.head()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>#Menggabungkan Data yang telah diambil menjadi satu data frame menggunakan concat</p>
+<p>###Dari Mysql Server
+###Mengambil data dari Sql Server menggunakan pyodbc</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df = pd.concat([Postgree_Lokal, Postgree_Elephant, Mysql], axis=1)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>#Import data ke CSV</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Postgree_Lokal.to_csv(&#39;Postgree_Lokal.csv&#39;, index=False)</span>
-<span class="c1"># Postgree_Elephant.to_csv(&#39;Postgree_Elephant.csv&#39;, index=False)</span>
-<span class="c1"># Mysql.to_csv(&#39;Mysql.csv&#39;, index=False)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>##Import CSV Ke Pipeline Orchest</p>
-<p>#import data ke dalam pipeline</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pyodbc</span>
 <span class="c1"># import pandas as pd</span>
-<span class="c1"># from sklearn import datasets</span>
 
-<span class="c1"># Postgree_Lokal=pd.read_csv(&#39;datasets/Postgree_Lokal.csv&#39;)</span>
-<span class="c1"># Postgree_Elephant=pd.read_csv(&#39;datasets/Postgree_Elephant.csv&#39;)</span>
-<span class="c1"># Mysql=pd.read_csv(&#39;datasets/Mysql.csv&#39;)</span>
-<span class="c1"># data = pd.concat([Postgree_Lokal, Postgree_Elephant, Mysql], axis=1)</span>
+<span class="c1"># server = &#39;PUTRAA\SQLEXPRESS&#39; </span>
+<span class="c1"># database = &#39;data_iris&#39; </span>
 
-<span class="c1"># df_data = data.iloc[:, :-1]</span>
-<span class="c1"># df_target = data.iloc[:, 4]</span>
+<span class="c1"># cnxn = pyodbc.connect(r&#39;Driver=ODBC Driver 17 for SQL Server;Server=PUTRAA\SQLEXPRESS;Database=data_iris;Trusted_Connection=yes;&#39;)  </span>
+<span class="c1"># cursor = cnxn.cursor()</span>
+
+<span class="c1"># query = &quot;SELECT class FROM [data_iris].[dbo].[iris#arff$]&quot;</span>
+<span class="c1"># sqlServer = pd.read_sql(query, cnxn)</span>
+<span class="c1"># print(sqlServer.head(600))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Menggabungkan Data
+##data yang telah diambil digabungkan menjadi satu data frame menggunakan concat</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn import datasets</span>
+
+<span class="c1"># data = orchest.get_inputs() </span>
+<span class="c1"># Mysql = data[&quot;Mysql&quot;]</span>
+<span class="c1"># Postgree = data[&quot;Postgree&quot;]</span>
+<span class="c1"># sqlServer = data[&quot;sqlServer&quot;]</span>
+<span class="c1"># frame_data = pd.concat([Mysql, Postgree, sqlServer], axis=1)</span>
+
+<span class="c1"># df_data = frame_data.iloc[:, :-1]</span>
+<span class="c1"># df_target = frame_data.iloc[:, 4]</span>
 <span class="c1"># print(&quot;Outputting converted &quot;)</span>
 <span class="c1"># orchest.output((df_data, df_target), name=&quot;data&quot;)</span>
-<span class="c1"># print(&quot;Success!&quot;)</span>
+<span class="c1"># print(frame_data)</span>
 
-<span class="c1"># data.head()</span>
+<span class="c1"># frame_data.head()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>#Split data menggunakan min max scaler</p>
+<p>##Membuat Model PCA
+##Mereduksi fitur yang awalnya 4 fitur menjadi 2 fitur</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
-<span class="c1"># from sklearn.model_selection import train_test_split</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data = orchest.get_inputs() </span>
+<span class="c1"># X, y = data[&quot;data&quot;]</span>
+
+<span class="c1"># pca = PCA(n_components=2)</span>
+<span class="c1"># X_pca = pca.fit_transform(X)</span>
+
+<span class="c1"># df = pd.DataFrame(X_pca, columns=[&#39;PC1&#39;, &#39;PC2&#39;])</span>
+<span class="c1"># df[&#39;Target&#39;] = y</span>
+<span class="c1"># orchest.output((X_pca, df[&#39;Target&#39;]), name=&quot;data&quot;)</span>
+<span class="c1"># print(df)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Split data menggunakan min max scaler
+##menentukan data training dan data testing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.model_selection import train_test_split</span>
 <span class="c1"># from sklearn.pipeline import Pipeline</span>
-<span class="c1"># # from sklearn.preprocessing import MinMaxScaler</span>
+
 <span class="c1"># data = orchest.get_inputs() </span>
 <span class="c1"># X, y = data[&quot;data&quot;]</span>
-<span class="c1"># # scaler = MinMaxScaler()</span>
+
+<span class="c1"># scaler = MinMaxScaler()</span>
 <span class="c1"># X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,random_state=0)</span>
-<span class="c1"># # X_train = scaler.fit_transform(X_train)</span>
-<span class="c1"># # X_test = scaler.transform(X_test)</span>
+<span class="c1"># X_train = scaler.fit_transform(X_train)</span>
+<span class="c1"># X_test = scaler.transform(X_test)</span>
 <span class="c1"># orchest.output((X_train, y_train, X_test, y_test), name=&quot;training_data&quot;)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>#KNN Model</p>
+<p>##Menentukan model</p>
+<p>###KNN Model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -521,7 +516,7 @@ Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 </div>
 </div>
 </div>
-<p>#Decision Tree Model</p>
+<p>###Decision Tree Model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -547,7 +542,7 @@ Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 </div>
 </div>
 </div>
-<p>#Naive Bayes Model</p>
+<p>###Naive Bayes Model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -573,7 +568,7 @@ Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 </div>
 </div>
 </div>
-<p>#Hasil Akurasi dari ketiga Model</p>
+<p>##Hasil Akurasi dari ketiga Model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>

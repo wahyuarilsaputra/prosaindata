@@ -32,10 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-#mangambil data twitter dengan TwitterSearchScrapper dan meletakan dalam array
-for i,tweet in enumerate(sntwitter.TwitterSearchScraper('muhaiminiskandar since:2022-01-01 until:2023-02-20').get_items()):
-  if i>500:
-    break
-  tweet_list.append([tweet.user.username,tweet.content,tweet.user.location])
+['header={', "    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'", '}', 'pta_list = []', 'for halaman_prodi in range(1,5):']
+...
+["      abstrak = soup2.find('p', {'align':'justify'}).text.replace('ABSTRAK','').replace('\\r','').replace('\\n','').replace('\\t','')", '    ', "      NIM = link.replace('https://pta.trunojoyo.ac.id/welcome/detail/', '')", '', '      pta_list.append([ NIM,Nama,judul,abstrak,prodi])']
 -------------------
 
