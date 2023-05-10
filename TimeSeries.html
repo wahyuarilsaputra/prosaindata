@@ -1,0 +1,1311 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas 3 : Data Time Series &#8212; 20-055 Proyek Saint Data B</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'TimeSeries';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tugas UTS : Processing Data PTA" href="DataPta.html" />
+    <link rel="prev" title="Tugas 2 : Pipeline" href="Pipeline.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/robitt.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/robitt.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="CrawlingTwitter.html">Tugas 1 : Crawling Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Tugas 2 : Pipeline</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 3 : Data Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataPta.html">Tugas UTS : Processing Data PTA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FTimeSeries.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/TimeSeries.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tugas 3 : Data Time Series</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data-airline-passengers">Import data Airline-Passengers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-target-data">Mengambil target data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-sequence-data">Split Sequence data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-fitur">Normalisasi data Fitur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-training-dan-testing">Split Data training dan Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-model">Menentukan model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-mse-mean-squared-error">Menghitung MSE (Mean Squared Error)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil">Hasil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-terendah">Hasil prediksi Terendah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-tertinggi">Hasil prediksi Tertinggi</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="tugas-3-data-time-series">
+<h1>Tugas 3 : Data Time Series<a class="headerlink" href="#tugas-3-data-time-series" title="Permalink to this heading">#</a></h1>
+<p>Time series merupakan data yang berisi mengenai pengamatan suatu perubahan dalam rentang waktu yang telah ditentukan</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="import-data-airline-passengers">
+<h2>Import data Airline-Passengers<a class="headerlink" href="#import-data-airline-passengers" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/jbrownlee/Datasets/master/airline-passengers.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mengambil-target-data">
+<h2>Mengambil target data<a class="headerlink" href="#mengambil-target-data" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      112
+1      118
+2      132
+3      129
+4      121
+      ... 
+139    606
+140    508
+141    461
+142    390
+143    432
+Name: Passengers, Length: 144, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="split-sequence-data">
+<h2>Split Sequence data<a class="headerlink" href="#split-sequence-data" title="Permalink to this heading">#</a></h2>
+<p>merubah data yang awalnya hanya 1 fitur menjadi beberapa fitur</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">):</span>
+  <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(),</span> <span class="nb">list</span><span class="p">()</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)):</span>
+    <span class="c1"># Mencari n akhir</span>
+    <span class="n">end_ix</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">n_steps</span>
+    <span class="c1"># Memeriksa urutan terluar dari data</span>
+    <span class="k">if</span> <span class="n">end_ix</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+      <span class="k">break</span>
+    <span class="c1"># Menambahkan bagian input dan output</span>
+    <span class="n">seq_x</span><span class="p">,</span> <span class="n">seq_y</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">end_ix</span><span class="p">],</span> <span class="n">sequence</span><span class="p">[</span><span class="n">end_ix</span><span class="p">]</span>
+    <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq_x</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq_y</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Menentukan Waktu dari data time series</span>
+<span class="n">jmlh_X</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shapes Target = &#39;</span><span class="p">,</span><span class="n">target</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1">#Split data fitur dan target</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">split_sequence</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">jmlh_X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shapes X = &#39;</span><span class="p">,</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shapes Y = &#39;</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shapes Target =  (144,)
+Shapes X =  (142, 2)
+Shapes Y =  (142,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newFitur</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Xt-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">jmlh_X</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">newTarget</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Data Prediksi&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">newData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">newFitur</span><span class="p">,</span><span class="n">newTarget</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">newData</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-bc7dc29b-254e-48ed-9d06-47400f7e6f40">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Xt-1</th>
+      <th>Xt-0</th>
+      <th>Data Prediksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>112</td>
+      <td>118</td>
+      <td>132</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>118</td>
+      <td>132</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>132</td>
+      <td>129</td>
+      <td>121</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>129</td>
+      <td>121</td>
+      <td>135</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>121</td>
+      <td>135</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>535</td>
+      <td>622</td>
+      <td>606</td>
+    </tr>
+    <tr>
+      <th>138</th>
+      <td>622</td>
+      <td>606</td>
+      <td>508</td>
+    </tr>
+    <tr>
+      <th>139</th>
+      <td>606</td>
+      <td>508</td>
+      <td>461</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>508</td>
+      <td>461</td>
+      <td>390</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>461</td>
+      <td>390</td>
+      <td>432</td>
+    </tr>
+  </tbody>
+</table>
+<p>142 rows × 3 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-bc7dc29b-254e-48ed-9d06-47400f7e6f40')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-bc7dc29b-254e-48ed-9d06-47400f7e6f40 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-bc7dc29b-254e-48ed-9d06-47400f7e6f40');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</div>
+<div class="section" id="normalisasi-data-fitur">
+<h2>Normalisasi data Fitur<a class="headerlink" href="#normalisasi-data-fitur" title="Permalink to this heading">#</a></h2>
+<p>Menggunakan MinMaxScaler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="n">scaler</span><span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">X_norm</span><span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">newFitur</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_norm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.01544402 0.02702703]
+ [0.02702703 0.05405405]
+ [0.05405405 0.04826255]
+ [0.04826255 0.03281853]
+ [0.03281853 0.05984556]
+ [0.05984556 0.08494208]
+ [0.08494208 0.08494208]
+ [0.08494208 0.06177606]
+ [0.06177606 0.02895753]
+ [0.02895753 0.        ]
+ [0.         0.02702703]
+ [0.02702703 0.02123552]
+ [0.02123552 0.04247104]
+ [0.04247104 0.07142857]
+ [0.07142857 0.05984556]
+ [0.05984556 0.04054054]
+ [0.04054054 0.08687259]
+ [0.08687259 0.12741313]
+ [0.12741313 0.12741313]
+ [0.12741313 0.1042471 ]
+ [0.1042471  0.05598456]
+ [0.05598456 0.01930502]
+ [0.01930502 0.06949807]
+ [0.06949807 0.07915058]
+ [0.07915058 0.08880309]
+ [0.08880309 0.14285714]
+ [0.14285714 0.11389961]
+ [0.11389961 0.13127413]
+ [0.13127413 0.14285714]
+ [0.14285714 0.18339768]
+ [0.18339768 0.18339768]
+ [0.18339768 0.15444015]
+ [0.15444015 0.11196911]
+ [0.11196911 0.08108108]
+ [0.08108108 0.11969112]
+ [0.11969112 0.12934363]
+ [0.12934363 0.14671815]
+ [0.14671815 0.17181467]
+ [0.17181467 0.14864865]
+ [0.14864865 0.15250965]
+ [0.15250965 0.22007722]
+ [0.22007722 0.24324324]
+ [0.24324324 0.26640927]
+ [0.26640927 0.2027027 ]
+ [0.2027027  0.16795367]
+ [0.16795367 0.13127413]
+ [0.13127413 0.17374517]
+ [0.17374517 0.17760618]
+ [0.17760618 0.17760618]
+ [0.17760618 0.25482625]
+ [0.25482625 0.25289575]
+ [0.25289575 0.24131274]
+ [0.24131274 0.26833977]
+ [0.26833977 0.30888031]
+ [0.30888031 0.32432432]
+ [0.32432432 0.25675676]
+ [0.25675676 0.20656371]
+ [0.20656371 0.14671815]
+ [0.14671815 0.18725869]
+ [0.18725869 0.19305019]
+ [0.19305019 0.16216216]
+ [0.16216216 0.25289575]
+ [0.25289575 0.23745174]
+ [0.23745174 0.25096525]
+ [0.25096525 0.30888031]
+ [0.30888031 0.38223938]
+ [0.38223938 0.36486486]
+ [0.36486486 0.2992278 ]
+ [0.2992278  0.24131274]
+ [0.24131274 0.19111969]
+ [0.19111969 0.24131274]
+ [0.24131274 0.26640927]
+ [0.26640927 0.24903475]
+ [0.24903475 0.31467181]
+ [0.31467181 0.31853282]
+ [0.31853282 0.32046332]
+ [0.32046332 0.40733591]
+ [0.40733591 0.5019305 ]
+ [0.5019305  0.46911197]
+ [0.46911197 0.4015444 ]
+ [0.4015444  0.32818533]
+ [0.32818533 0.25675676]
+ [0.25675676 0.33590734]
+ [0.33590734 0.34749035]
+ [0.34749035 0.33397683]
+ [0.33397683 0.41119691]
+ [0.41119691 0.4034749 ]
+ [0.4034749  0.41312741]
+ [0.41312741 0.52123552]
+ [0.52123552 0.5965251 ]
+ [0.5965251  0.58108108]
+ [0.58108108 0.48455598]
+ [0.48455598 0.38996139]
+ [0.38996139 0.32239382]
+ [0.32239382 0.38996139]
+ [0.38996139 0.40733591]
+ [0.40733591 0.38030888]
+ [0.38030888 0.48648649]
+ [0.48648649 0.47104247]
+ [0.47104247 0.48455598]
+ [0.48455598 0.61389961]
+ [0.61389961 0.6969112 ]
+ [0.6969112  0.7007722 ]
+ [0.7007722  0.57915058]
+ [0.57915058 0.46911197]
+ [0.46911197 0.38803089]
+ [0.38803089 0.44787645]
+ [0.44787645 0.45559846]
+ [0.45559846 0.41312741]
+ [0.41312741 0.4980695 ]
+ [0.4980695  0.47104247]
+ [0.47104247 0.5       ]
+ [0.5        0.63899614]
+ [0.63899614 0.74710425]
+ [0.74710425 0.77413127]
+ [0.77413127 0.57915058]
+ [0.57915058 0.49227799]
+ [0.49227799 0.3976834 ]
+ [0.3976834  0.44980695]
+ [0.44980695 0.49420849]
+ [0.49420849 0.45945946]
+ [0.45945946 0.58301158]
+ [0.58301158 0.56370656]
+ [0.56370656 0.61003861]
+ [0.61003861 0.71042471]
+ [0.71042471 0.85714286]
+ [0.85714286 0.87837838]
+ [0.87837838 0.69305019]
+ [0.69305019 0.58494208]
+ [0.58494208 0.4980695 ]
+ [0.4980695  0.58108108]
+ [0.58108108 0.6042471 ]
+ [0.6042471  0.55405405]
+ [0.55405405 0.60810811]
+ [0.60810811 0.68918919]
+ [0.68918919 0.71042471]
+ [0.71042471 0.83204633]
+ [0.83204633 1.        ]
+ [1.         0.96911197]
+ [0.96911197 0.77992278]
+ [0.77992278 0.68918919]
+ [0.68918919 0.55212355]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="split-data-training-dan-testing">
+<h2>Split Data training dan Testing<a class="headerlink" href="#split-data-training-dan-testing" title="Permalink to this heading">#</a></h2>
+<p>Mengambil data tes sebanyak 20% dari seluruh data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_norm</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="menentukan-model">
+<h2>Menentukan model<a class="headerlink" href="#menentukan-model" title="Permalink to this heading">#</a></h2>
+<p>Menggunakan Model KNN dengan jumlah n = 3</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import knn</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="n">model_knn</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span><span class="o">=</span><span class="n">model_knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="menghitung-mse-mean-squared-error">
+<h2>Menghitung MSE (Mean Squared Error)<a class="headerlink" href="#menghitung-mse-mean-squared-error" title="Permalink to this heading">#</a></h2>
+<p>Rumus MSE :
+$<span class="math notranslate nohighlight">\( \text{MSE} = \frac{1}{n} \sum_{i=0}^n (y_i - \hat{y}_i)^2\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2207.5363984674336
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(29,) (29,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hasil">
+<h2>Hasil<a class="headerlink" href="#hasil" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_y_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y_test&#39;</span><span class="p">])</span>
+<span class="n">df_y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y_pred&#39;</span><span class="p">])</span>
+
+<span class="n">df_hasil</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_y_test</span><span class="p">,</span> <span class="n">df_y_pred</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_hasil</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-3fbdf05a-d0bf-4d6c-922c-136e9bb2a058">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y_test</th>
+      <th>y_pred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>194</td>
+      <td>163.666667</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>203</td>
+      <td>252.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>170</td>
+      <td>143.666667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>180</td>
+      <td>221.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>145</td>
+      <td>137.333333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>119</td>
+      <td>125.000000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>318</td>
+      <td>375.333333</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>390</td>
+      <td>448.666667</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>318</td>
+      <td>343.666667</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>465</td>
+      <td>434.666667</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>306</td>
+      <td>241.666667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>463</td>
+      <td>595.666667</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>104</td>
+      <td>141.333333</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>355</td>
+      <td>360.333333</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>461</td>
+      <td>507.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>166</td>
+      <td>127.666667</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>277</td>
+      <td>274.000000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>317</td>
+      <td>271.333333</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>404</td>
+      <td>520.333333</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>178</td>
+      <td>144.666667</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>264</td>
+      <td>223.666667</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>313</td>
+      <td>324.000000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>235</td>
+      <td>199.666667</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>172</td>
+      <td>153.000000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>234</td>
+      <td>246.333333</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>158</td>
+      <td>185.666667</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>269</td>
+      <td>286.000000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>336</td>
+      <td>294.000000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>172</td>
+      <td>182.333333</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-3fbdf05a-d0bf-4d6c-922c-136e9bb2a058')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-3fbdf05a-d0bf-4d6c-922c-136e9bb2a058 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-3fbdf05a-d0bf-4d6c-922c-136e9bb2a058');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+<div class="section" id="hasil-prediksi-terendah">
+<h3>Hasil prediksi Terendah<a class="headerlink" href="#hasil-prediksi-terendah" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>104
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hasil-prediksi-tertinggi">
+<h3>Hasil prediksi Tertinggi<a class="headerlink" href="#hasil-prediksi-tertinggi" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>622
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Pipeline.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 2 : Pipeline</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="DataPta.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tugas UTS : Processing Data PTA</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data-airline-passengers">Import data Airline-Passengers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-target-data">Mengambil target data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-sequence-data">Split Sequence data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi-data-fitur">Normalisasi data Fitur</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-training-dan-testing">Split Data training dan Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-model">Menentukan model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-mse-mean-squared-error">Menghitung MSE (Mean Squared Error)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil">Hasil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-terendah">Hasil prediksi Terendah</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-prediksi-tertinggi">Hasil prediksi Tertinggi</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Wahyu Aril Saputra
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
