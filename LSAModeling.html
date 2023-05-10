@@ -63,6 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'LSAModeling';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Scrapping Data dari komentar video Youtube" href="crawling_yt.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -153,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="CrawlingTwitter.html">Tugas 1 : Crawling Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Pipeline.html">Tugas 2 : Pipeline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TimeSeries.html">Tugas 3 : Data Time Series</a></li>
@@ -161,6 +162,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crawling_yt.html">Scrapping Data dari komentar video Youtube</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 5 : LSA Topic Modelling</a></li>
 </ul>
 
     </div>
@@ -355,6 +357,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instal-nltk">Instal NLTK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-per-topik">Menentukan bobot per topik</a></li>
 </ul>
             </nav>
         </div>
@@ -389,7 +394,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-c6c2f55d-4df7-4547-9332-947a3e90682e">
+  <div id="df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -473,7 +478,7 @@ document.write(`
 </table>
 <p>800 rows × 2 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-c6c2f55d-4df7-4547-9332-947a3e90682e')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -524,12 +529,12 @@ document.write(`
 
       <script>
         const buttonEl =
-          document.querySelector('#df-c6c2f55d-4df7-4547-9332-947a3e90682e button.colab-df-convert');
+          document.querySelector('#df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-c6c2f55d-4df7-4547-9332-947a3e90682e');
+          const element = document.querySelector('#df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -550,6 +555,9 @@ document.write(`
   </div>
   </div></div>
 </div>
+</div>
+<div class="section" id="instal-nltk">
+<h2>Instal NLTK<a class="headerlink" href="#instal-nltk" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
@@ -563,6 +571,9 @@ document.write(`
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="tokenisasi-data">
+<h2>Tokenisasi Data<a class="headerlink" href="#tokenisasi-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
@@ -587,6 +598,9 @@ document.write(`
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="menentukan-bobot-per-topik">
+<h2>Menentukan bobot per topik<a class="headerlink" href="#menentukan-bobot-per-topik" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bobot kata terhadap masing masing topik</span>
@@ -595,15 +609,15 @@ document.write(`
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">component</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">svd_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
     <span class="n">zipped</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">component</span><span class="p">)</span>
     <span class="n">top_terms_key</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">zipped</span><span class="p">,</span> <span class="n">key</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_key</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topik &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">top_terms_key</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0:  [(&#39;ganjar&#39;, 0.4760479111628185), (&#39;partai&#39;, 0.32775851285309693)]
-Topic 1:  [(&#39;ganjar&#39;, 0.7112714705841378), (&#39;pranowo&#39;, 0.15285982628574304)]
-Topic 2:  [(&#39;pdip&#39;, 0.4885047776580847), (&#39;golkar&#39;, 0.15582352757856346)]
-Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [(&#39;ganjar&#39;, 0.47592876803871736), (&#39;partai&#39;, 0.32742887927110936)]
+Topik 1:  [(&#39;ganjar&#39;, 0.7122929194254572), (&#39;pranowo&#39;, 0.15440112367405107)]
+Topik 2:  [(&#39;pdip&#39;, 0.5119514842025279), (&#39;golkar&#39;, 0.149596394732382)]
+Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148)]
 </pre></div>
 </div>
 </div>
@@ -621,7 +635,7 @@ Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-0308a84c-f72d-4066-b25b-fd8f093f921f">
+  <div id="df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -653,46 +667,46 @@ Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718
     <tr>
       <th>0</th>
       <td>ini pilpres pdi p megawati umumkan capres ...</td>
-      <td>0.183382</td>
-      <td>-0.040714</td>
-      <td>-0.020851</td>
-      <td>-0.000405</td>
+      <td>0.183408</td>
+      <td>-0.041154</td>
+      <td>-0.020495</td>
+      <td>-0.001766</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>kami hanya mendukung partai politik yang konsi...</td>
-      <td>0.113703</td>
-      <td>-0.121190</td>
-      <td>-0.047785</td>
-      <td>-0.023144</td>
+      <td>0.113605</td>
+      <td>-0.120043</td>
+      <td>-0.046576</td>
+      <td>-0.011141</td>
       <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>dari ucapan yang disampaikan pak gp dan pdip k...</td>
-      <td>0.178803</td>
-      <td>-0.134861</td>
-      <td>0.043231</td>
-      <td>-0.090472</td>
+      <td>0.178741</td>
+      <td>-0.131861</td>
+      <td>0.044671</td>
+      <td>-0.084607</td>
       <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>kalau saya lebih baik mendukung pak mahpud md ...</td>
-      <td>0.162475</td>
-      <td>-0.033830</td>
-      <td>-0.362838</td>
-      <td>-0.101259</td>
+      <td>0.162786</td>
+      <td>-0.043147</td>
+      <td>-0.373633</td>
+      <td>-0.128706</td>
       <td>0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>mantap inilah yang di tunggu tunggu olh rakyat...</td>
-      <td>0.145783</td>
-      <td>-0.031551</td>
-      <td>-0.136135</td>
-      <td>0.024518</td>
+      <td>0.145720</td>
+      <td>-0.028890</td>
+      <td>-0.136939</td>
+      <td>0.019509</td>
       <td>0</td>
     </tr>
     <tr>
@@ -707,53 +721,53 @@ Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718
     <tr>
       <th>795</th>
       <td>presen fokus pada sisa jabatan jangan offse ur...</td>
-      <td>0.201747</td>
-      <td>-0.144134</td>
-      <td>0.058659</td>
-      <td>-0.053608</td>
+      <td>0.201532</td>
+      <td>-0.143658</td>
+      <td>0.048047</td>
+      <td>-0.034490</td>
       <td>0</td>
     </tr>
     <tr>
       <th>796</th>
       <td>biasa saja enggak heboh atas pengumuman ini</td>
-      <td>0.003650</td>
-      <td>-0.004039</td>
-      <td>-0.000800</td>
-      <td>-0.001322</td>
+      <td>0.003643</td>
+      <td>-0.003890</td>
+      <td>-0.000571</td>
+      <td>-0.001391</td>
       <td>0</td>
     </tr>
     <tr>
       <th>797</th>
       <td>memang harus kita harus pilih capres yang mau ...</td>
-      <td>0.117440</td>
-      <td>-0.042936</td>
-      <td>-0.066648</td>
-      <td>-0.029319</td>
+      <td>0.117403</td>
+      <td>-0.045253</td>
+      <td>-0.071599</td>
+      <td>-0.026052</td>
       <td>0</td>
     </tr>
     <tr>
       <th>798</th>
       <td>hati hati merah</td>
-      <td>0.020630</td>
-      <td>-0.001692</td>
-      <td>-0.039880</td>
-      <td>0.001122</td>
+      <td>0.020625</td>
+      <td>-0.001152</td>
+      <td>-0.033196</td>
+      <td>-0.003906</td>
       <td>0</td>
     </tr>
     <tr>
       <th>799</th>
       <td>prabowo presen bukan ganjar sistem pemilu di i...</td>
-      <td>0.164628</td>
-      <td>0.025429</td>
-      <td>-0.090877</td>
-      <td>-0.021955</td>
+      <td>0.164698</td>
+      <td>0.023009</td>
+      <td>-0.095500</td>
+      <td>-0.013861</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
 <p>800 rows × 6 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-0308a84c-f72d-4066-b25b-fd8f093f921f')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -804,12 +818,12 @@ Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718
 
       <script>
         const buttonEl =
-          document.querySelector('#df-0308a84c-f72d-4066-b25b-fd8f093f921f button.colab-df-convert');
+          document.querySelector('#df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-0308a84c-f72d-4066-b25b-fd8f093f921f');
+          const element = document.querySelector('#df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -837,10 +851,10 @@ Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    653
-3     56
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    649
+3     62
 2     46
-1     45
+1     43
 Name: Topik, dtype: int64
 </pre></div>
 </div>
@@ -880,6 +894,15 @@ Name: Topik, dtype: int64
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="crawling_yt.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Scrapping Data dari komentar video Youtube</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -899,6 +922,9 @@ Name: Topik, dtype: int64
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instal-nltk">Instal NLTK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-per-topik">Menentukan bobot per topik</a></li>
 </ul>
   </nav></div>
 
