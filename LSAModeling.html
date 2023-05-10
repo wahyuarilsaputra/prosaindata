@@ -160,7 +160,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="DataPta.html">Tugas UTS : Processing Data PTA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="CrawlingYoutube.html">Scrapping Data dari komentar video Youtube</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crawling_yt.html">Scrapping Data dari komentar video Youtube</a></li>
 </ul>
 
     </div>
@@ -331,7 +331,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -347,6 +349,14 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -367,6 +377,8 @@ document.write(`
 </div>
 </div>
 </div>
+<div class="section" id="import-data">
+<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -377,7 +389,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-908b164f-14f6-454e-9eea-bacc063afbf0">
+  <div id="df-c6c2f55d-4df7-4547-9332-947a3e90682e">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -461,7 +473,7 @@ document.write(`
 </table>
 <p>800 rows × 2 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-908b164f-14f6-454e-9eea-bacc063afbf0')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c6c2f55d-4df7-4547-9332-947a3e90682e')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -512,12 +524,12 @@ document.write(`
 
       <script>
         const buttonEl =
-          document.querySelector('#df-908b164f-14f6-454e-9eea-bacc063afbf0 button.colab-df-convert');
+          document.querySelector('#df-c6c2f55d-4df7-4547-9332-947a3e90682e button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-908b164f-14f6-454e-9eea-bacc063afbf0');
+          const element = document.querySelector('#df-c6c2f55d-4df7-4547-9332-947a3e90682e');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -588,10 +600,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0:  [(&#39;ganjar&#39;, 0.47609174231277485), (&#39;partai&#39;, 0.3282620993176556)]
-Topic 1:  [(&#39;ganjar&#39;, 0.7111122537120673), (&#39;pranowo&#39;, 0.15427517158591467)]
-Topic 2:  [(&#39;pdip&#39;, 0.5307091297005596), (&#39;golkar&#39;, 0.13170533132748385)]
-Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0:  [(&#39;ganjar&#39;, 0.4760479111628185), (&#39;partai&#39;, 0.32775851285309693)]
+Topic 1:  [(&#39;ganjar&#39;, 0.7112714705841378), (&#39;pranowo&#39;, 0.15285982628574304)]
+Topic 2:  [(&#39;pdip&#39;, 0.4885047776580847), (&#39;golkar&#39;, 0.15582352757856346)]
+Topic 3:  [(&#39;pdi&#39;, 0.6094048632460186), (&#39;p&#39;, 0.5747653197770718)]
 </pre></div>
 </div>
 </div>
@@ -609,7 +621,7 @@ Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-e134458c-d0a3-4cfe-8315-af930205fabc">
+  <div id="df-0308a84c-f72d-4066-b25b-fd8f093f921f">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -641,46 +653,46 @@ Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)
     <tr>
       <th>0</th>
       <td>ini pilpres pdi p megawati umumkan capres ...</td>
-      <td>0.183363</td>
-      <td>-0.040756</td>
-      <td>-0.021178</td>
-      <td>0.000674</td>
+      <td>0.183382</td>
+      <td>-0.040714</td>
+      <td>-0.020851</td>
+      <td>-0.000405</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>kami hanya mendukung partai politik yang konsi...</td>
-      <td>0.113701</td>
-      <td>-0.120217</td>
-      <td>-0.045382</td>
-      <td>-0.029347</td>
+      <td>0.113703</td>
+      <td>-0.121190</td>
+      <td>-0.047785</td>
+      <td>-0.023144</td>
       <td>0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>dari ucapan yang disampaikan pak gp dan pdip k...</td>
-      <td>0.178702</td>
-      <td>-0.131841</td>
-      <td>0.054259</td>
-      <td>-0.062453</td>
+      <td>0.178803</td>
+      <td>-0.134861</td>
+      <td>0.043231</td>
+      <td>-0.090472</td>
       <td>0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>kalau saya lebih baik mendukung pak mahpud md ...</td>
-      <td>0.162691</td>
-      <td>-0.041074</td>
-      <td>-0.374072</td>
-      <td>-0.098152</td>
+      <td>0.162475</td>
+      <td>-0.033830</td>
+      <td>-0.362838</td>
+      <td>-0.101259</td>
       <td>0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>mantap inilah yang di tunggu tunggu olh rakyat...</td>
-      <td>0.145638</td>
-      <td>-0.028233</td>
-      <td>-0.127099</td>
-      <td>0.029726</td>
+      <td>0.145783</td>
+      <td>-0.031551</td>
+      <td>-0.136135</td>
+      <td>0.024518</td>
       <td>0</td>
     </tr>
     <tr>
@@ -695,53 +707,53 @@ Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)
     <tr>
       <th>795</th>
       <td>presen fokus pada sisa jabatan jangan offse ur...</td>
-      <td>0.201801</td>
-      <td>-0.146102</td>
-      <td>0.054400</td>
-      <td>-0.053933</td>
+      <td>0.201747</td>
+      <td>-0.144134</td>
+      <td>0.058659</td>
+      <td>-0.053608</td>
       <td>0</td>
     </tr>
     <tr>
       <th>796</th>
       <td>biasa saja enggak heboh atas pengumuman ini</td>
-      <td>0.003641</td>
-      <td>-0.003795</td>
-      <td>-0.000388</td>
-      <td>-0.001153</td>
+      <td>0.003650</td>
+      <td>-0.004039</td>
+      <td>-0.000800</td>
+      <td>-0.001322</td>
       <td>0</td>
     </tr>
     <tr>
       <th>797</th>
       <td>memang harus kita harus pilih capres yang mau ...</td>
-      <td>0.117494</td>
-      <td>-0.045389</td>
-      <td>-0.071508</td>
-      <td>-0.026543</td>
+      <td>0.117440</td>
+      <td>-0.042936</td>
+      <td>-0.066648</td>
+      <td>-0.029319</td>
       <td>0</td>
     </tr>
     <tr>
       <th>798</th>
       <td>hati hati merah</td>
-      <td>0.020581</td>
-      <td>-0.000373</td>
-      <td>-0.038560</td>
-      <td>-0.005994</td>
+      <td>0.020630</td>
+      <td>-0.001692</td>
+      <td>-0.039880</td>
+      <td>0.001122</td>
       <td>0</td>
     </tr>
     <tr>
       <th>799</th>
       <td>prabowo presen bukan ganjar sistem pemilu di i...</td>
-      <td>0.164699</td>
-      <td>0.022769</td>
-      <td>-0.096148</td>
-      <td>-0.028575</td>
+      <td>0.164628</td>
+      <td>0.025429</td>
+      <td>-0.090877</td>
+      <td>-0.021955</td>
       <td>0</td>
     </tr>
   </tbody>
 </table>
 <p>800 rows × 6 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-e134458c-d0a3-4cfe-8315-af930205fabc')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-0308a84c-f72d-4066-b25b-fd8f093f921f')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -792,12 +804,12 @@ Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)
 
       <script>
         const buttonEl =
-          document.querySelector('#df-e134458c-d0a3-4cfe-8315-af930205fabc button.colab-df-convert');
+          document.querySelector('#df-0308a84c-f72d-4066-b25b-fd8f093f921f button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-e134458c-d0a3-4cfe-8315-af930205fabc');
+          const element = document.querySelector('#df-0308a84c-f72d-4066-b25b-fd8f093f921f');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -825,12 +837,13 @@ Topic 3:  [(&#39;pdi&#39;, 0.6225143849117227), (&#39;p&#39;, 0.595509157197118)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    643
-3     65
-2     48
-1     44
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    653
+3     56
+2     46
+1     45
 Name: Topik, dtype: int64
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -876,6 +889,20 @@ Name: Topik, dtype: int64
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

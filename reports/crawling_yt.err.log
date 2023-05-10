@@ -1,0 +1,115 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Menyimpan data yang akan di crawling
+data = []
+
+url = "https://www.youtube.com/watch?v=dmZsg9HP1Yw"
+
+# Menghubungkan driver local ke link youtube yang dituju
+with Chrome(executable_path=r'C:\Program Files\chromedriver.exe') as driver:    
+    wait = WebDriverWait(driver, 10)
+    driver.get(
+        url)
+
+    # melakukan perulangan untuk scrolling data sebanyak 10 kali
+    for item in range(10):
+        wait.until(EC.visibility_of_element_located(
+            (By.TAG_NAME, "body"))).send_keys(Keys.END)
+        time.sleep(5)
+
+    # mencari elemen dengan tag content pada halaman youtube
+    for comment in wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#content"))):
+        data.append(comment.text)
+------------------
+
+----- stderr -----
+<ipython-input-5-d6545d9dbd34>:7: DeprecationWarning: executable_path has been deprecated, please pass in a Service object
+  with Chrome(executable_path=r'C:\Program Files\chromedriver.exe') as driver:
+------------------
+
+[0;31m[0m
+[0;31mWebDriverException[0mTraceback (most recent call last)
+[0;32m<ipython-input-5-d6545d9dbd34>[0m in [0;36m<cell line: 7>[0;34m()[0m
+[1;32m      5[0m [0;34m[0m[0m
+[1;32m      6[0m [0;31m# Menghubungkan driver local ke link youtube yang dituju[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 7[0;31m [0;32mwith[0m [0mChrome[0m[0;34m([0m[0mexecutable_path[0m[0;34m=[0m[0;34mr'C:\Program Files\chromedriver.exe'[0m[0;34m)[0m [0;32mas[0m [0mdriver[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      8[0m     [0mwait[0m [0;34m=[0m [0mWebDriverWait[0m[0;34m([0m[0mdriver[0m[0;34m,[0m [0;36m10[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      9[0m     driver.get(
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/chrome/webdriver.py[0m in [0;36m__init__[0;34m(self, executable_path, port, options, service_args, desired_capabilities, service_log_path, chrome_options, service, keep_alive)[0m
+[1;32m     82[0m         [0mservice[0m[0;34m.[0m[0mpath[0m [0;34m=[0m [0mDriverFinder[0m[0;34m.[0m[0mget_path[0m[0;34m([0m[0mservice[0m[0;34m,[0m [0moptions[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     83[0m [0;34m[0m[0m
+[0;32m---> 84[0;31m         super().__init__(
+[0m[1;32m     85[0m             [0mDesiredCapabilities[0m[0;34m.[0m[0mCHROME[0m[0;34m[[0m[0;34m"browserName"[0m[0;34m][0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     86[0m             [0;34m"goog"[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/chromium/webdriver.py[0m in [0;36m__init__[0;34m(self, browser_name, vendor_prefix, port, options, service_args, desired_capabilities, service_log_path, service, keep_alive)[0m
+[1;32m    102[0m [0;34m[0m[0m
+[1;32m    103[0m         [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 104[0;31m             super().__init__(
+[0m[1;32m    105[0m                 command_executor=ChromiumRemoteConnection(
+[1;32m    106[0m                     [0mremote_server_addr[0m[0;34m=[0m[0mself[0m[0;34m.[0m[0mservice[0m[0;34m.[0m[0mservice_url[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/remote/webdriver.py[0m in [0;36m__init__[0;34m(self, command_executor, desired_capabilities, browser_profile, proxy, keep_alive, file_detector, options)[0m
+[1;32m    284[0m         [0mself[0m[0;34m.[0m[0m_authenticator_id[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    285[0m         [0mself[0m[0;34m.[0m[0mstart_client[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 286[0;31m         [0mself[0m[0;34m.[0m[0mstart_session[0m[0;34m([0m[0mcapabilities[0m[0;34m,[0m [0mbrowser_profile[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    287[0m [0;34m[0m[0m
+[1;32m    288[0m     [0;32mdef[0m [0m__repr__[0m[0;34m([0m[0mself[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/remote/webdriver.py[0m in [0;36mstart_session[0;34m(self, capabilities, browser_profile)[0m
+[1;32m    376[0m         [0mw3c_caps[0m [0;34m=[0m [0m_make_w3c_caps[0m[0;34m([0m[0mcapabilities[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    377[0m         [0mparameters[0m [0;34m=[0m [0;34m{[0m[0;34m"capabilities"[0m[0;34m:[0m [0mw3c_caps[0m[0;34m}[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 378[0;31m         [0mresponse[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mexecute[0m[0;34m([0m[0mCommand[0m[0;34m.[0m[0mNEW_SESSION[0m[0;34m,[0m [0mparameters[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    379[0m         [0;32mif[0m [0;34m"sessionId"[0m [0;32mnot[0m [0;32min[0m [0mresponse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    380[0m             [0mresponse[0m [0;34m=[0m [0mresponse[0m[0;34m[[0m[0;34m"value"[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/remote/webdriver.py[0m in [0;36mexecute[0;34m(self, driver_command, params)[0m
+[1;32m    438[0m         [0mresponse[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mcommand_executor[0m[0;34m.[0m[0mexecute[0m[0;34m([0m[0mdriver_command[0m[0;34m,[0m [0mparams[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    439[0m         [0;32mif[0m [0mresponse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 440[0;31m             [0mself[0m[0;34m.[0m[0merror_handler[0m[0;34m.[0m[0mcheck_response[0m[0;34m([0m[0mresponse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    441[0m             [0mresponse[0m[0;34m[[0m[0;34m"value"[0m[0;34m][0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_unwrap_value[0m[0;34m([0m[0mresponse[0m[0;34m.[0m[0mget[0m[0;34m([0m[0;34m"value"[0m[0;34m,[0m [0;32mNone[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    442[0m             [0;32mreturn[0m [0mresponse[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/usr/local/lib/python3.10/dist-packages/selenium/webdriver/remote/errorhandler.py[0m in [0;36mcheck_response[0;34m(self, response)[0m
+[1;32m    243[0m                 [0malert_text[0m [0;34m=[0m [0mvalue[0m[0;34m[[0m[0;34m"alert"[0m[0;34m][0m[0;34m.[0m[0mget[0m[0;34m([0m[0;34m"text"[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    244[0m             [0;32mraise[0m [0mexception_class[0m[0;34m([0m[0mmessage[0m[0;34m,[0m [0mscreen[0m[0;34m,[0m [0mstacktrace[0m[0;34m,[0m [0malert_text[0m[0;34m)[0m  [0;31m# type: ignore[call-arg]  # mypy is not smart enough here[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 245[0;31m         [0;32mraise[0m [0mexception_class[0m[0;34m([0m[0mmessage[0m[0;34m,[0m [0mscreen[0m[0;34m,[0m [0mstacktrace[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;31mWebDriverException[0m: Message: unknown error: cannot find Chrome binary
+Stacktrace:
+#0 0x5568d0239133 <unknown>
+#1 0x5568cff6d966 <unknown>
+#2 0x5568cff94b57 <unknown>
+#3 0x5568cff9307b <unknown>
+#4 0x5568cffd29ad <unknown>
+#5 0x5568cffd218f <unknown>
+#6 0x5568cffc99a3 <unknown>
+#7 0x5568cff9e46a <unknown>
+#8 0x5568cff9f55e <unknown>
+#9 0x5568d01f8cae <unknown>
+#10 0x5568d01fc8fe <unknown>
+#11 0x5568d0205f20 <unknown>
+#12 0x5568d01fd923 <unknown>
+#13 0x5568d01d0c0e <unknown>
+#14 0x5568d0220b08 <unknown>
+#15 0x5568d0220c97 <unknown>
+#16 0x5568d0231113 <unknown>
+#17 0x7fdf2e0ea609 start_thread
+
+
