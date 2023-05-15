@@ -63,7 +63,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'LSAModeling';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Tugas 5 : LSA Topic Modelling" href="crawling_yt.html" />
+    <link rel="prev" title="Tugas 4 : PageRank" href="PageRank.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -161,7 +161,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="DataPta.html">Tugas UTS : Processing Data PTA</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
-<li class="toctree-l1"><a class="reference internal" href="crawling_yt.html">Tugas 5 : LSA Topic Modelling</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 5 : LSA Topic Modelling</a></li>
 </ul>
 
@@ -356,10 +355,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instal-nltk">Instal NLTK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-per-topik">Menentukan bobot per topik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-data-komentar-youtube">Scraping Data Komentar Youtube</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-komentar-youtube">Mengambil komentar youtube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-parameter-link-youtube">Menentukan Parameter Link Youtube</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data">Cleaning Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghilangkan-teks-yang-tidak-digunakan">Menghilangkan teks yang tidak digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steaming-data">Steaming Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubah-data-awal-dan-cleaning-ke-dataframe">Ubah data awal dan cleaning ke DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-nilai-yang-kosong-nan">Cek nilai yang kosong (NaN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-data-missing-value-nan">Menghapus data Missing Value (Nan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-hasil-data">Print hasil data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data-ke-csv">Import data ke CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lsa-topic-modelling">LSA Topic Modelling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-nltk">Install NLTK</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-setiap-topic">Menentukan Bobot Setiap Topic</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -373,28 +389,126 @@ document.write(`
                   
   <div class="tex2jax_ignore mathjax_ignore section" id="tugas-5-lsa-topic-modelling">
 <h1>Tugas 5 : LSA Topic Modelling<a class="headerlink" href="#tugas-5-lsa-topic-modelling" title="Permalink to this heading">#</a></h1>
+<p>Dengan google api client</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ignore warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>emoji<span class="w"> </span>indoNLP<span class="w"> </span>--quiet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import library</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">googleapiclient.discovery</span> <span class="kn">import</span> <span class="n">build</span>
+
+<span class="kn">from</span> <span class="nn">indoNLP.preprocessing</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">replace_word_elongation</span><span class="p">,</span> <span class="n">replace_slang</span><span class="p">,</span> <span class="n">remove_html</span><span class="p">,</span> <span class="n">remove_url</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">emoji</span>
+
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="n">stopwords</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ignore warnings</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="import-data">
-<h2>Import data<a class="headerlink" href="#import-data" title="Permalink to this heading">#</a></h2>
+<div class="section" id="scraping-data-komentar-youtube">
+<h2>Scraping Data Komentar Youtube<a class="headerlink" href="#scraping-data-komentar-youtube" title="Permalink to this heading">#</a></h2>
+<div class="section" id="mengambil-komentar-youtube">
+<h3>Mengambil komentar youtube<a class="headerlink" href="#mengambil-komentar-youtube" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/wahyuarilsaputra/dataset/main/Data_KomentarYoutube.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">video_comments</span><span class="p">(</span><span class="n">video_id</span><span class="p">,</span> <span class="n">api_key</span><span class="p">):</span>
+	<span class="c1"># empty list for storing reply</span>
+	<span class="n">replies</span> <span class="o">=</span> <span class="p">[]</span>
+
+	<span class="c1"># creating youtube resource object</span>
+	<span class="n">youtube</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="s1">&#39;youtube&#39;</span><span class="p">,</span> <span class="s1">&#39;v3&#39;</span><span class="p">,</span> <span class="n">developerKey</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+
+	<span class="c1"># retrieve youtube video results</span>
+	<span class="n">video_response</span> <span class="o">=</span> <span class="n">youtube</span><span class="o">.</span><span class="n">commentThreads</span><span class="p">()</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">part</span><span class="o">=</span><span class="s1">&#39;snippet,replies&#39;</span><span class="p">,</span> <span class="n">videoId</span><span class="o">=</span><span class="n">video_id</span><span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+	<span class="c1"># iterate video response</span>
+	<span class="k">while</span> <span class="n">video_response</span><span class="p">:</span>
+		<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">video_response</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+			
+			<span class="c1"># Extracting comments ()</span>
+			<span class="n">published</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;topLevelComment&#39;</span><span class="p">][</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;publishedAt&#39;</span><span class="p">]</span>
+			<span class="n">user</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;topLevelComment&#39;</span><span class="p">][</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;authorDisplayName&#39;</span><span class="p">]</span>
+			<span class="n">comment</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;topLevelComment&#39;</span><span class="p">][</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;textDisplay&#39;</span><span class="p">]</span>
+			<span class="c1"># likeCount = item[&#39;snippet&#39;][&#39;topLevelComment&#39;][&#39;snippet&#39;][&#39;likeCount&#39;]</span>
+
+			<span class="n">replies</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">published</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">comment</span><span class="p">])</span>
+
+			<span class="n">replycount</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;totalReplyCount&#39;</span><span class="p">]</span>
+
+			<span class="c1"># if reply is there</span>
+			<span class="k">if</span> <span class="n">replycount</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+				<span class="c1"># iterate through all reply</span>
+				<span class="k">for</span> <span class="n">reply</span> <span class="ow">in</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;replies&#39;</span><span class="p">][</span><span class="s1">&#39;comments&#39;</span><span class="p">]:</span>
+					
+					<span class="c1"># Extract reply</span>
+					<span class="n">published</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;publishedAt&#39;</span><span class="p">]</span>
+					<span class="n">user</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;authorDisplayName&#39;</span><span class="p">]</span>
+					<span class="n">repl</span> <span class="o">=</span> <span class="n">reply</span><span class="p">[</span><span class="s1">&#39;snippet&#39;</span><span class="p">][</span><span class="s1">&#39;textDisplay&#39;</span><span class="p">]</span>
+					<span class="c1"># likeCount = reply[&#39;snippet&#39;][&#39;likeCount&#39;]</span>
+					
+					<span class="c1"># Store reply is list</span>
+					<span class="n">replies</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">published</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">repl</span><span class="p">])</span>
+
+		<span class="c1"># Again repeat</span>
+		<span class="k">if</span> <span class="s1">&#39;nextPageToken&#39;</span> <span class="ow">in</span> <span class="n">video_response</span><span class="p">:</span>
+			<span class="n">video_response</span> <span class="o">=</span> <span class="n">youtube</span><span class="o">.</span><span class="n">commentThreads</span><span class="p">()</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
+					<span class="n">part</span> <span class="o">=</span> <span class="s1">&#39;snippet,replies&#39;</span><span class="p">,</span>
+					<span class="n">pageToken</span> <span class="o">=</span> <span class="n">video_response</span><span class="p">[</span><span class="s1">&#39;nextPageToken&#39;</span><span class="p">],</span> 
+					<span class="n">videoId</span> <span class="o">=</span> <span class="n">video_id</span>
+				<span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">break</span>
+	<span class="c1">#endwhile</span>
+	<span class="k">return</span> <span class="n">replies</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="menentukan-parameter-link-youtube">
+<h3>Menentukan Parameter Link Youtube<a class="headerlink" href="#menentukan-parameter-link-youtube" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#api key</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s1">&#39;AIzaSyACxT95EPnUkLb_Mtjq2MvG0tcJqQiulhI&#39;</span>
+<span class="n">video_id</span> <span class="o">=</span> <span class="s2">&quot;dmZsg9HP1Yw&quot;</span>
+
+<span class="n">comments</span> <span class="o">=</span> <span class="n">video_comments</span><span class="p">(</span><span class="n">video_id</span><span class="p">,</span> <span class="n">api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataframe</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comments</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Tanggal Publish&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;Komentar&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5">
+  <div id="df-65b2fa96-44e0-48a7-879a-e65b91c9aa80">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -414,71 +528,46 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>komentar</th>
-      <th>hasil komentar</th>
+      <th>Tanggal Publish</th>
+      <th>user</th>
+      <th>Komentar</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>ID\nSkip navigation\nSign in\nPilpres 2024, PD...</td>
-      <td>ini pilpres pdi p megawati umumkan capres ...</td>
+      <td>2023-05-08T11:37:32Z</td>
+      <td>wijafamily</td>
+      <td>Saran untuk Pak Jokowi untuk tdk mendukung pak...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>Kami hanya mendukung partai politik yang konsi...</td>
-      <td>kami hanya mendukung partai politik yang konsi...</td>
+      <td>2023-05-02T15:32:32Z</td>
+      <td>Nur Salam</td>
+      <td>Wts</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>Dari ucapan yang disampaikan Pak GP dan PDIP k...</td>
-      <td>dari ucapan yang disampaikan pak gp dan pdip k...</td>
+      <td>2023-04-29T13:16:21Z</td>
+      <td>Dody Abdul kadir</td>
+      <td>Yunarto wijaya kok dijadikan nara sumber.. tid...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Kalau saya lebih baik mendukung pak mahpud MD ...</td>
-      <td>kalau saya lebih baik mendukung pak mahpud md ...</td>
+      <td>2023-04-28T13:29:29Z</td>
+      <td>Moh kristanto Kristanto</td>
+      <td>Siapapun lawan capresnya dr PDIP saya tetap pi...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Mantap inilah yg di tunggu tunggu Olh rakyat ...</td>
-      <td>mantap inilah yang di tunggu tunggu olh rakyat...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>795</th>
-      <td>Presiden Fokus pada Sisa Jabatan..jangan offsi...</td>
-      <td>presen fokus pada sisa jabatan jangan offse ur...</td>
-    </tr>
-    <tr>
-      <th>796</th>
-      <td>Biasa aja , gak heboh atas pengumuman ini .</td>
-      <td>biasa saja enggak heboh atas pengumuman ini</td>
-    </tr>
-    <tr>
-      <th>797</th>
-      <td>MEMANG HARUS KITA HARUS PILIH CAPRES YG MAU ME...</td>
-      <td>memang harus kita harus pilih capres yang mau ...</td>
-    </tr>
-    <tr>
-      <th>798</th>
-      <td>hati hati merah</td>
-      <td>hati hati merah</td>
-    </tr>
-    <tr>
-      <th>799</th>
-      <td>Prabowo Presiden bukan Ganjar, Sistem Pemilu d...</td>
-      <td>prabowo presen bukan ganjar sistem pemilu di i...</td>
+      <td>2023-04-26T12:05:11Z</td>
+      <td>Satria piningit</td>
+      <td>Ayat Ayat Satria Piningit&lt;br&gt;QS At Taubah&lt;br&gt;1...</td>
     </tr>
   </tbody>
 </table>
-<p>800 rows × 2 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-65b2fa96-44e0-48a7-879a-e65b91c9aa80')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -529,12 +618,12 @@ document.write(`
 
       <script>
         const buttonEl =
-          document.querySelector('#df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5 button.colab-df-convert');
+          document.querySelector('#df-65b2fa96-44e0-48a7-879a-e65b91c9aa80 button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-033a8180-bfb4-4e1a-ae57-ed1c76a776f5');
+          const element = document.querySelector('#df-65b2fa96-44e0-48a7-879a-e65b91c9aa80');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -556,8 +645,328 @@ document.write(`
   </div></div>
 </div>
 </div>
-<div class="section" id="instal-nltk">
-<h2>Instal NLTK<a class="headerlink" href="#instal-nltk" title="Permalink to this heading">#</a></h2>
+</div>
+<div class="section" id="cleaning-data">
+<h2>Cleaning Data<a class="headerlink" href="#cleaning-data" title="Permalink to this heading">#</a></h2>
+<div class="section" id="menghilangkan-teks-yang-tidak-digunakan">
+<h3>Menghilangkan teks yang tidak digunakan<a class="headerlink" href="#menghilangkan-teks-yang-tidak-digunakan" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Teks Cleaning</span>
+
+
+<span class="k">def</span> <span class="nf">cleaning</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="c1"># Menghilangkan tag bawaan HTML</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="s1">&#39;&lt;.*?&gt;|&amp;([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+    <span class="c1"># mengubah defaukt teks ke huruf kecil</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># menghapus karakter kosong di depan dan belakang teks</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># menghapus tanda baca, karakter spesial, dan spasi ganda</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&lt;.*?&gt;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># menghapus teks yang berisi angka</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\[[0-9]*\]&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Mengubah text &#39;nan&#39; dengan whitespace agar nantinya dapat dihapus</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Menghapus bawaan teks youtube</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;skip&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;navigation&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;sign&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="steaming-data">
+<h3>Steaming Data<a class="headerlink" href="#steaming-data" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import </span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+<span class="kn">from</span> <span class="nn">indoNLP.preprocessing</span> <span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">replace_word_elongation</span><span class="p">,</span> <span class="n">replace_slang</span><span class="p">,</span> <span class="n">emoji_to_words</span><span class="p">,</span> <span class="n">remove_html</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">([</span><span class="n">replace_word_elongation</span><span class="p">,</span> <span class="n">replace_slang</span><span class="p">,</span>
+                <span class="n">emoji_to_words</span><span class="p">,</span> <span class="n">remove_html</span><span class="p">])</span>
+<span class="c1"># steamming</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ubah-data-awal-dan-cleaning-ke-dataframe">
+<h3>Ubah data awal dan cleaning ke DataFrame<a class="headerlink" href="#ubah-data-awal-dan-cleaning-ke-dataframe" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil komentar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Komentar&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">pipe</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil komentar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil komentar&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cleaning</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># ubah empty string menjadi NaN</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil komentar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;hasil komentar&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="cek-nilai-yang-kosong-nan">
+<h3>Cek nilai yang kosong (NaN)<a class="headerlink" href="#cek-nilai-yang-kosong-nan" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tanggal Publish    0
+user               0
+Komentar           0
+hasil komentar     0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="menghapus-data-missing-value-nan">
+<h3>Menghapus data Missing Value (Nan)<a class="headerlink" href="#menghapus-data-missing-value-nan" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="print-hasil-data">
+<h3>Print hasil data<a class="headerlink" href="#print-hasil-data" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-c7523a15-f4b0-4c5c-8f84-c4bd19ebc63f">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tanggal Publish</th>
+      <th>user</th>
+      <th>Komentar</th>
+      <th>hasil komentar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2023-05-08T11:37:32Z</td>
+      <td>wijafamily</td>
+      <td>Saran untuk Pak Jokowi untuk tdk mendukung pak...</td>
+      <td>saran untuk pak jokowi untuk tak mendukung pak...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2023-05-02T15:32:32Z</td>
+      <td>Nur Salam</td>
+      <td>Wts</td>
+      <td>wts</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2023-04-29T13:16:21Z</td>
+      <td>Dody Abdul kadir</td>
+      <td>Yunarto wijaya kok dijadikan nara sumber.. tid...</td>
+      <td>yunarto wijaya kok dijadikan nara sumber tak p...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023-04-28T13:29:29Z</td>
+      <td>Moh kristanto Kristanto</td>
+      <td>Siapapun lawan capresnya dr PDIP saya tetap pi...</td>
+      <td>siapapun lawan capresnya dari pdip saya tetap ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023-04-26T12:05:11Z</td>
+      <td>Satria piningit</td>
+      <td>Ayat Ayat Satria Piningit&lt;br&gt;QS At Taubah&lt;br&gt;1...</td>
+      <td>ayat ayat satria piningitqs at taubah sungguh ...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1627</th>
+      <td>2023-04-18T04:09:25Z</td>
+      <td>Indar Jaya</td>
+      <td>Yg cocok capres.mega Wati.cawapres nya puan Ma...</td>
+      <td>yang cocok capres mega wati cawapres nya puan ...</td>
+    </tr>
+    <tr>
+      <th>1628</th>
+      <td>2023-04-18T04:02:35Z</td>
+      <td>QOUTE MUTIARA</td>
+      <td>Pilihla yg jangn mencla mencle,jangn pilih yg ...</td>
+      <td>pilihla yang jangn mencla mencle jangn pilih y...</td>
+    </tr>
+    <tr>
+      <th>1629</th>
+      <td>2023-04-18T04:41:53Z</td>
+      <td>Fatimah Betawi</td>
+      <td>😂😂😂 iya iya...jelek tapi pd</td>
+      <td>wajah gembira berurai air mata wajah gembira b...</td>
+    </tr>
+    <tr>
+      <th>1630</th>
+      <td>2023-04-18T03:19:26Z</td>
+      <td>Evi Elianti</td>
+      <td>Lidah tdk bertulang</td>
+      <td>lah tak bertulang</td>
+    </tr>
+    <tr>
+      <th>1631</th>
+      <td>2023-04-18T03:13:40Z</td>
+      <td>Evi Elianti</td>
+      <td>Pengamat yg plg tdk sye suka para surpe dan di...</td>
+      <td>pengamat yang pulang tak sye suka para surpe d...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1632 rows × 4 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c7523a15-f4b0-4c5c-8f84-c4bd19ebc63f')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-c7523a15-f4b0-4c5c-8f84-c4bd19ebc63f button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-c7523a15-f4b0-4c5c-8f84-c4bd19ebc63f');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  </div></div>
+</div>
+</div>
+<div class="section" id="import-data-ke-csv">
+<h3>Import data ke CSV<a class="headerlink" href="#import-data-ke-csv" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to csv</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;Data_KomentarYoutube.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lsa-topic-modelling">
+<h2>LSA Topic Modelling<a class="headerlink" href="#lsa-topic-modelling" title="Permalink to this heading">#</a></h2>
+<div class="section" id="install-nltk">
+<h3>Install NLTK<a class="headerlink" href="#install-nltk" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
@@ -573,7 +982,7 @@ document.write(`
 </div>
 </div>
 <div class="section" id="tokenisasi-data">
-<h2>Tokenisasi Data<a class="headerlink" href="#tokenisasi-data" title="Permalink to this heading">#</a></h2>
+<h3>Tokenisasi Data<a class="headerlink" href="#tokenisasi-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
@@ -599,8 +1008,8 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="section" id="menentukan-bobot-per-topik">
-<h2>Menentukan bobot per topik<a class="headerlink" href="#menentukan-bobot-per-topik" title="Permalink to this heading">#</a></h2>
+<div class="section" id="menentukan-bobot-setiap-topic">
+<h3>Menentukan Bobot Setiap Topic<a class="headerlink" href="#menentukan-bobot-setiap-topic" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># bobot kata terhadap masing masing topik</span>
@@ -614,10 +1023,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [(&#39;ganjar&#39;, 0.47592876803871736), (&#39;partai&#39;, 0.32742887927110936)]
-Topik 1:  [(&#39;ganjar&#39;, 0.7122929194254572), (&#39;pranowo&#39;, 0.15440112367405107)]
-Topik 2:  [(&#39;pdip&#39;, 0.5119514842025279), (&#39;golkar&#39;, 0.149596394732382)]
-Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 0:  [(&#39;wajah&#39;, 0.46790693980043774), (&#39;mata&#39;, 0.3976620199796745)]
+Topik 1:  [(&#39;ganjar&#39;, 0.4446420922325266), (&#39;pdip&#39;, 0.29459347016447823)]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topik 2:  [(&#39;ganjar&#39;, 0.7485116656023337), (&#39;pranowo&#39;, 0.11726020500493675)]
+Topik 3:  [(&#39;jempol&#39;, 0.8273884534189683), (&#39;nkri&#39;, 0.12959322817949398)]
 </pre></div>
 </div>
 </div>
@@ -635,7 +1046,7 @@ Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25">
+  <div id="df-d80de2c0-247a-459a-8256-37f3e9cc8bbc">
     <div class="colab-df-container">
       <div>
 <style scoped>
@@ -666,48 +1077,48 @@ Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148
   <tbody>
     <tr>
       <th>0</th>
-      <td>ini pilpres pdi p megawati umumkan capres ...</td>
-      <td>0.183408</td>
-      <td>-0.041154</td>
-      <td>-0.020495</td>
-      <td>-0.001766</td>
-      <td>0</td>
+      <td>saran untuk pak jokowi untuk tak mendukung pak...</td>
+      <td>7.576821e-02</td>
+      <td>1.722638e-01</td>
+      <td>4.889549e-02</td>
+      <td>3.046910e-02</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>kami hanya mendukung partai politik yang konsi...</td>
-      <td>0.113605</td>
-      <td>-0.120043</td>
-      <td>-0.046576</td>
-      <td>-0.011141</td>
-      <td>0</td>
+      <td>wts</td>
+      <td>-7.653961e-10</td>
+      <td>-1.432166e-08</td>
+      <td>5.628842e-08</td>
+      <td>-5.329450e-08</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>dari ucapan yang disampaikan pak gp dan pdip k...</td>
-      <td>0.178741</td>
-      <td>-0.131861</td>
-      <td>0.044671</td>
-      <td>-0.084607</td>
-      <td>0</td>
+      <td>yunarto wijaya kok dijadikan nara sumber tak p...</td>
+      <td>2.581473e-02</td>
+      <td>4.836741e-02</td>
+      <td>-2.200292e-02</td>
+      <td>-2.539911e-02</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>kalau saya lebih baik mendukung pak mahpud md ...</td>
-      <td>0.162786</td>
-      <td>-0.043147</td>
-      <td>-0.373633</td>
-      <td>-0.128706</td>
-      <td>0</td>
+      <td>siapapun lawan capresnya dari pdip saya tetap ...</td>
+      <td>1.498863e-01</td>
+      <td>3.497389e-01</td>
+      <td>-8.518420e-02</td>
+      <td>-5.472497e-02</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>mantap inilah yang di tunggu tunggu olh rakyat...</td>
-      <td>0.145720</td>
-      <td>-0.028890</td>
-      <td>-0.136939</td>
-      <td>0.019509</td>
-      <td>0</td>
+      <td>ayat ayat satria piningitqs at taubah sungguh ...</td>
+      <td>1.243153e-02</td>
+      <td>2.191830e-02</td>
+      <td>-1.721186e-02</td>
+      <td>9.458705e-03</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>...</th>
@@ -719,55 +1130,55 @@ Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148
       <td>...</td>
     </tr>
     <tr>
-      <th>795</th>
-      <td>presen fokus pada sisa jabatan jangan offse ur...</td>
-      <td>0.201532</td>
-      <td>-0.143658</td>
-      <td>0.048047</td>
-      <td>-0.034490</td>
+      <th>1627</th>
+      <td>yang cocok capres mega wati cawapres nya puan ...</td>
+      <td>6.807025e-02</td>
+      <td>1.313547e-01</td>
+      <td>-5.114991e-02</td>
+      <td>-2.416382e-02</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1628</th>
+      <td>pilihla yang jangn mencla mencle jangn pilih y...</td>
+      <td>1.657071e-02</td>
+      <td>3.049118e-02</td>
+      <td>-2.322264e-02</td>
+      <td>-4.312090e-03</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1629</th>
+      <td>wajah gembira berurai air mata wajah gembira b...</td>
+      <td>7.542513e-01</td>
+      <td>-3.473947e-01</td>
+      <td>8.974303e-02</td>
+      <td>-1.068921e-01</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>796</th>
-      <td>biasa saja enggak heboh atas pengumuman ini</td>
-      <td>0.003643</td>
-      <td>-0.003890</td>
-      <td>-0.000571</td>
-      <td>-0.001391</td>
+      <th>1630</th>
+      <td>lah tak bertulang</td>
+      <td>-1.075140e-09</td>
+      <td>-3.567304e-09</td>
+      <td>-4.170805e-08</td>
+      <td>-1.845935e-07</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>797</th>
-      <td>memang harus kita harus pilih capres yang mau ...</td>
-      <td>0.117403</td>
-      <td>-0.045253</td>
-      <td>-0.071599</td>
-      <td>-0.026052</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>798</th>
-      <td>hati hati merah</td>
-      <td>0.020625</td>
-      <td>-0.001152</td>
-      <td>-0.033196</td>
-      <td>-0.003906</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>799</th>
-      <td>prabowo presen bukan ganjar sistem pemilu di i...</td>
-      <td>0.164698</td>
-      <td>0.023009</td>
-      <td>-0.095500</td>
-      <td>-0.013861</td>
-      <td>0</td>
+      <th>1631</th>
+      <td>pengamat yang pulang tak sye suka para surpe d...</td>
+      <td>8.322015e-03</td>
+      <td>1.789519e-02</td>
+      <td>-1.213092e-02</td>
+      <td>-3.952830e-03</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
-<p>800 rows × 6 columns</p>
+<p>1632 rows × 6 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25')"
+      <button class="colab-df-convert" onclick="convertToInteractive('df-d80de2c0-247a-459a-8256-37f3e9cc8bbc')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
         
@@ -818,12 +1229,12 @@ Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148
 
       <script>
         const buttonEl =
-          document.querySelector('#df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25 button.colab-df-convert');
+          document.querySelector('#df-d80de2c0-247a-459a-8256-37f3e9cc8bbc button.colab-df-convert');
         buttonEl.style.display =
           google.colab.kernel.accessAllowed ? 'block' : 'none';
 
         async function convertToInteractive(key) {
-          const element = document.querySelector('#df-7fe1d29d-1d21-4112-a3e6-bfc2bb896e25');
+          const element = document.querySelector('#df-d80de2c0-247a-459a-8256-37f3e9cc8bbc');
           const dataTable =
             await google.colab.kernel.invokeFunction('convertToInteractive',
                                                      [key], {});
@@ -851,12 +1262,13 @@ Topik 3:  [(&#39;pdi&#39;, 0.5798220731637675), (&#39;p&#39;, 0.5508033585791148
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    649
-3     62
-2     46
-1     43
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    1223
+0     229
+3     108
+2      72
 Name: Topik, dtype: int64
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -895,12 +1307,12 @@ Name: Topik, dtype: int64
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="crawling_yt.html"
+       href="PageRank.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tugas 5 : LSA Topic Modelling</p>
+        <p class="prev-next-title">Tugas 4 : PageRank</p>
       </div>
     </a>
 </div></div>
@@ -921,10 +1333,27 @@ Name: Topik, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data">Import data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instal-nltk">Instal NLTK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-per-topik">Menentukan bobot per topik</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-data-komentar-youtube">Scraping Data Komentar Youtube</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-komentar-youtube">Mengambil komentar youtube</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-parameter-link-youtube">Menentukan Parameter Link Youtube</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data">Cleaning Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghilangkan-teks-yang-tidak-digunakan">Menghilangkan teks yang tidak digunakan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steaming-data">Steaming Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ubah-data-awal-dan-cleaning-ke-dataframe">Ubah data awal dan cleaning ke DataFrame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cek-nilai-yang-kosong-nan">Cek nilai yang kosong (NaN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menghapus-data-missing-value-nan">Menghapus data Missing Value (Nan)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-hasil-data">Print hasil data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-data-ke-csv">Import data ke CSV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lsa-topic-modelling">LSA Topic Modelling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-nltk">Install NLTK</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenisasi-data">Tokenisasi Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-bobot-setiap-topic">Menentukan Bobot Setiap Topic</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
