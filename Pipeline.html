@@ -364,7 +364,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -380,6 +382,28 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-iris-dari-berbagai-sql">Mengambil data iris dari berbagai sql</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-postgreesql">Dari PostgreeSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-mysql-server">Dari Mysql Server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-data">Menggabungkan Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-pca">Membuat Model PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-menggunakan-min-max-scaler">Split data menggunakan min max scaler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-model">Menentukan model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-model">KNN Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-model">Decision Tree Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-model">Naive Bayes Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akurasi-dari-ketiga-model">Hasil Akurasi dari ketiga Model</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -401,9 +425,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Mengambil data iris dari berbagai sql</p>
-<p>###Dari PostgreeSQL
-###Mengambil data dari postgreesql menggunakan psycopg2</p>
+<div class="section" id="mengambil-data-iris-dari-berbagai-sql">
+<h2>Mengambil data iris dari berbagai sql<a class="headerlink" href="#mengambil-data-iris-dari-berbagai-sql" title="Permalink to this heading">#</a></h2>
+<div class="section" id="dari-postgreesql">
+<h3>Dari PostgreeSQL<a class="headerlink" href="#dari-postgreesql" title="Permalink to this heading">#</a></h3>
+<p>Mengambil data dari postgreesql menggunakan psycopg2</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># conn = psycopg2.connect(</span>
@@ -426,8 +452,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>###Dari Mysql Server
-###Mengambil data dari Mysql Server menggunakan mysql.connector</p>
+</div>
+<div class="section" id="dari-mysql-server">
+<h3>Dari Mysql Server<a class="headerlink" href="#dari-mysql-server" title="Permalink to this heading">#</a></h3>
+<p>Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mydb = mysql.connector.connect(</span>
@@ -447,7 +475,7 @@ document.write(`
 </div>
 </div>
 <p>###Dari Mysql Server
-###Mengambil data dari Sql Server menggunakan pyodbc</p>
+Mengambil data dari Sql Server menggunakan pyodbc</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import pyodbc</span>
@@ -466,8 +494,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Menggabungkan Data
-##data yang telah diambil digabungkan menjadi satu data frame menggunakan concat</p>
+</div>
+</div>
+<div class="section" id="menggabungkan-data">
+<h2>Menggabungkan Data<a class="headerlink" href="#menggabungkan-data" title="Permalink to this heading">#</a></h2>
+<p>data yang telah diambil digabungkan menjadi satu data frame menggunakan concat</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn import datasets</span>
@@ -489,8 +520,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Membuat Model PCA
-##Mereduksi fitur yang awalnya 4 fitur menjadi 2 fitur</p>
+</div>
+<div class="section" id="membuat-model-pca">
+<h2>Membuat Model PCA<a class="headerlink" href="#membuat-model-pca" title="Permalink to this heading">#</a></h2>
+<p>Mereduksi fitur yang awalnya 4 fitur menjadi 2 fitur</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data = orchest.get_inputs() </span>
@@ -507,8 +540,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Split data menggunakan min max scaler
-##menentukan data training dan data testing</p>
+</div>
+<div class="section" id="split-data-menggunakan-min-max-scaler">
+<h2>Split data menggunakan min max scaler<a class="headerlink" href="#split-data-menggunakan-min-max-scaler" title="Permalink to this heading">#</a></h2>
+<p>menentukan data training dan data testing</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.model_selection import train_test_split</span>
@@ -526,8 +561,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Menentukan model</p>
-<p>###KNN Model</p>
+</div>
+<div class="section" id="menentukan-model">
+<h2>Menentukan model<a class="headerlink" href="#menentukan-model" title="Permalink to this heading">#</a></h2>
+<div class="section" id="knn-model">
+<h3>KNN Model<a class="headerlink" href="#knn-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -553,7 +591,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>###Decision Tree Model</p>
+</div>
+<div class="section" id="decision-tree-model">
+<h3>Decision Tree Model<a class="headerlink" href="#decision-tree-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -579,7 +619,9 @@ document.write(`
 </div>
 </div>
 </div>
-<p>###Naive Bayes Model</p>
+</div>
+<div class="section" id="naive-bayes-model">
+<h3>Naive Bayes Model<a class="headerlink" href="#naive-bayes-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import numpy as np</span>
@@ -605,7 +647,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>##Hasil Akurasi dari ketiga Model</p>
+</div>
+</div>
+<div class="section" id="hasil-akurasi-dari-ketiga-model">
+<h2>Hasil Akurasi dari ketiga Model<a class="headerlink" href="#hasil-akurasi-dari-ketiga-model" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import orchest</span>
@@ -614,6 +659,7 @@ document.write(`
 <span class="c1">#     if name != &quot;unnamed&quot;:</span>
 <span class="c1">#         print(f&quot;\n{name:30} {value}&quot;)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -677,6 +723,34 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mengambil-data-iris-dari-berbagai-sql">Mengambil data iris dari berbagai sql</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-postgreesql">Dari PostgreeSQL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dari-mysql-server">Dari Mysql Server</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menggabungkan-data">Menggabungkan Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-model-pca">Membuat Model PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-menggunakan-min-max-scaler">Split data menggunakan min max scaler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#menentukan-model">Menentukan model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knn-model">KNN Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-model">Decision Tree Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-bayes-model">Naive Bayes Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-akurasi-dari-ketiga-model">Hasil Akurasi dari ketiga Model</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
