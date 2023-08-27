@@ -30,8 +30,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-["pencarian = 'snbp'", "cari = pencarian.replace(' ','+')", "tglAwal = '18/01/2022'", "tglAkhir = '18/02/2023'", 'header={']
+['header={', "    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'", '}', '#Teknik_informatika = 10', 'pta_list = []']
 ...
-['    for x in konten:', "      isi = x.find_all('p')", '      y = [y.text for y in isi]', "      fixkonten = ''.join(y).replace('\\n','').replace('ADVERTISEMENT','').replace('SCROLL TO RESUME CONTENT','')", '      berita_list.append([judul,fixkonten])']
+["      abstrak = soup2.find('p', {'align':'justify'}).text.replace('ABSTRAK','').replace('\\r','').replace('\\n','').replace('\\t','')", '', "      NIM = link.replace('https://pta.trunojoyo.ac.id/welcome/detail/', '')", '', '      pta_list.append([ NIM,Nama,judul,abstrak,prodi])']
 -------------------
 

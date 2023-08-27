@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Tugas UTS : Processing Data PTA &#8212; 20-055 Proyek Saint Data B</title>
   
   
@@ -163,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LSAModeling.html">Tugas 5 : LSA Topic Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UAS.html">Tugas UAS : Prediksi data Time Series</a></li>
 </ul>
 
     </div>
@@ -448,7 +450,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="tugas-uts-processing-data-pta">
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-uts-processing-data-pta">
 <h1>Tugas UTS : Processing Data PTA<a class="headerlink" href="#tugas-uts-processing-data-pta" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -458,7 +460,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="section" id="load-data">
+<section id="load-data">
 <h2>Load Data<a class="headerlink" href="#load-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -617,12 +619,12 @@ document.write(`
   </div>
   </div></div>
 </div>
-</div>
-<div class="section" id="pre-processing-data">
+</section>
+<section id="pre-processing-data">
 <h2>Pre Processing Data<a class="headerlink" href="#pre-processing-data" title="Permalink to this heading">#</a></h2>
-<div class="section" id="processing-data-null">
+<section id="processing-data-null">
 <h3>Processing Data Null<a class="headerlink" href="#processing-data-null" title="Permalink to this heading">#</a></h3>
-<div class="section" id="cek-data-null">
+<section id="cek-data-null">
 <h4>Cek Data Null<a class="headerlink" href="#cek-data-null" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -642,8 +644,8 @@ dtype: int64
 </div>
 </div>
 <p>Terdapat 25 data kosong pada abstrak dan 43 data kosong pada Label</p>
-</div>
-<div class="section" id="hapus-data-null">
+</section>
+<section id="hapus-data-null">
 <h4>Hapus Data Null<a class="headerlink" href="#hapus-data-null" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -670,8 +672,8 @@ dtype: int64
 </div>
 </div>
 <p>Menghapus data Kosong pada abstrak</p>
-</div>
-<div class="section" id="cek-data-not-null">
+</section>
+<section id="cek-data-not-null">
 <h4>Cek data not null<a class="headerlink" href="#cek-data-not-null" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -691,8 +693,8 @@ dtype: int64
 </div>
 </div>
 <p>Data yang tidak kosong berjumlah 810</p>
-</div>
-<div class="section" id="cek-jumlah-class-data">
+</section>
+<section id="cek-jumlah-class-data">
 <h4>Cek Jumlah Class Data<a class="headerlink" href="#cek-jumlah-class-data" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -709,8 +711,8 @@ Name: Label, dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="grafik-data-class">
+</section>
+<section id="grafik-data-class">
 <h4>Grafik data Class<a class="headerlink" href="#grafik-data-class" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -725,9 +727,9 @@ Name: Label, dtype: int64
 <img alt="_images/0057711b0b4623c9e3710a35519578dd177bcb3111dce5eccb968fba71367e36.png" src="_images/0057711b0b4623c9e3710a35519578dd177bcb3111dce5eccb968fba71367e36.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="cleaning-text">
+</section>
+</section>
+<section id="cleaning-text">
 <h3>Cleaning Text<a class="headerlink" href="#cleaning-text" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -921,7 +923,7 @@ Name: Label, dtype: int64
   </div>
   </div></div>
 </div>
-<div class="section" id="export-data-cleaning">
+<section id="export-data-cleaning">
 <h4>Export Data Cleaning<a class="headerlink" href="#export-data-cleaning" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -931,9 +933,9 @@ Name: Label, dtype: int64
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="menghapus-missing-value">
+</section>
+</section>
+<section id="menghapus-missing-value">
 <h3>Menghapus Missing Value<a class="headerlink" href="#menghapus-missing-value" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -975,8 +977,8 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="menghapus-duplicate-value">
+</section>
+<section id="menghapus-duplicate-value">
 <h3>Menghapus Duplicate Value<a class="headerlink" href="#menghapus-duplicate-value" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1118,8 +1120,8 @@ dtype: int64
 <img alt="_images/0057711b0b4623c9e3710a35519578dd177bcb3111dce5eccb968fba71367e36.png" src="_images/0057711b0b4623c9e3710a35519578dd177bcb3111dce5eccb968fba71367e36.png" />
 </div>
 </div>
-</div>
-<div class="section" id="tokenisasi">
+</section>
+<section id="tokenisasi">
 <h3>Tokenisasi<a class="headerlink" href="#tokenisasi" title="Permalink to this heading">#</a></h3>
 <p>Memecah Kalimat Per kata</p>
 <div class="cell docutils container">
@@ -1215,7 +1217,7 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="tokenisasi-abstrak">
+<section id="tokenisasi-abstrak">
 <h4>Tokenisasi Abstrak<a class="headerlink" href="#tokenisasi-abstrak" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1356,9 +1358,9 @@ dtype: int64
   </div>
   </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="menghapus-stop-word">
+</section>
+</section>
+<section id="menghapus-stop-word">
 <h3>Menghapus Stop Word<a class="headerlink" href="#menghapus-stop-word" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1388,7 +1390,7 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="stop-word-abstrak">
+<section id="stop-word-abstrak">
 <h4>Stop Word Abstrak<a class="headerlink" href="#stop-word-abstrak" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1528,9 +1530,9 @@ dtype: int64
   </div>
   </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="stemming">
+</section>
+</section>
+<section id="stemming">
 <h3>Stemming<a class="headerlink" href="#stemming" title="Permalink to this heading">#</a></h3>
 <p>Mengubah Kata Kerja menjadi Kata Dasar</p>
 <div class="cell docutils container">
@@ -1571,7 +1573,7 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="stemming-abstrak">
+<section id="stemming-abstrak">
 <h4>Stemming Abstrak<a class="headerlink" href="#stemming-abstrak" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1837,9 +1839,9 @@ dtype: int64
   </div>
   </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="export-data-processing">
+</section>
+</section>
+<section id="export-data-processing">
 <h3>Export data Processing<a class="headerlink" href="#export-data-processing" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1850,9 +1852,9 @@ dtype: int64
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="load-data-processing">
+</section>
+</section>
+<section id="load-data-processing">
 <h2>Load Data Processing<a class="headerlink" href="#load-data-processing" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2018,8 +2020,8 @@ dtype: int64
   </div>
   </div></div>
 </div>
-</div>
-<div class="section" id="modeling-data">
+</section>
+<section id="modeling-data">
 <h2>Modeling Data<a class="headerlink" href="#modeling-data" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2031,7 +2033,7 @@ dtype: int64
 </div>
 </div>
 </div>
-<div class="section" id="ekstraksi-fitur">
+<section id="ekstraksi-fitur">
 <h3>Ekstraksi Fitur<a class="headerlink" href="#ekstraksi-fitur" title="Permalink to this heading">#</a></h3>
 <p>Menggunakan TF-IDF :
 term frequency–inverse document frequency</p>
@@ -2483,8 +2485,8 @@ term frequency–inverse document frequency</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="pca">
+</section>
+<section id="pca">
 <h3>PCA<a class="headerlink" href="#pca" title="Permalink to this heading">#</a></h3>
 <p>Untuk mereduksi kolom data</p>
 <div class="cell docutils container">
@@ -2523,11 +2525,11 @@ term frequency–inverse document frequency</p>
 </div>
 </div>
 <p>Data yang awalnya berukuran 6442 di reduksi menjadi 10 kolom</p>
-</div>
-</div>
-<div class="section" id="training-data">
+</section>
+</section>
+<section id="training-data">
 <h2>Training Data<a class="headerlink" href="#training-data" title="Permalink to this heading">#</a></h2>
-<div class="section" id="split-data">
+<section id="split-data">
 <h3>Split Data<a class="headerlink" href="#split-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2536,8 +2538,8 @@ term frequency–inverse document frequency</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="model-knn">
+</section>
+<section id="model-knn">
 <h3>Model KNN<a class="headerlink" href="#model-knn" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2555,8 +2557,8 @@ term frequency–inverse document frequency</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="model-naive-bayes">
+</section>
+<section id="model-naive-bayes">
 <h3>Model Naive Bayes<a class="headerlink" href="#model-naive-bayes" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2574,11 +2576,11 @@ term frequency–inverse document frequency</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="evaluasi">
+</section>
+</section>
+<section id="evaluasi">
 <h2>Evaluasi<a class="headerlink" href="#evaluasi" title="Permalink to this heading">#</a></h2>
-<div class="section" id="menggunakan-knn">
+<section id="menggunakan-knn">
 <h3>Menggunakan KNN<a class="headerlink" href="#menggunakan-knn" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2615,8 +2617,8 @@ weighted avg       0.82      0.83      0.82       243
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="menggunakan-naive-bayes">
+</section>
+<section id="menggunakan-naive-bayes">
 <h3>Menggunakan Naive Bayes<a class="headerlink" href="#menggunakan-naive-bayes" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2653,8 +2655,8 @@ weighted avg       0.78      0.70      0.72       243
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="cek-akurasi-model">
+</section>
+<section id="cek-akurasi-model">
 <h3>Cek Akurasi Model<a class="headerlink" href="#cek-akurasi-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2691,9 +2693,9 @@ F1 score :  0.7152618953244548
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="export-model">
+</section>
+</section>
+<section id="export-model">
 <h2>Export Model<a class="headerlink" href="#export-model" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2711,8 +2713,8 @@ F1 score :  0.7152618953244548
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {

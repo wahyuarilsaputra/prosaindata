@@ -7,7 +7,8 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Tugas 2 : Pipeline &#8212; 20-055 Proyek Saint Data B</title>
   
   
@@ -163,6 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Graph.html">Materi : Graph</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PageRank.html">Tugas 4 : PageRank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="LSAModeling.html">Tugas 5 : LSA Topic Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UAS.html">Tugas UAS : Prediksi data Time Series</a></li>
 </ul>
 
     </div>
@@ -413,7 +415,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="tex2jax_ignore mathjax_ignore section" id="tugas-2-pipeline">
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-2-pipeline">
 <h1>Tugas 2 : Pipeline<a class="headerlink" href="#tugas-2-pipeline" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -425,9 +427,9 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="section" id="mengambil-data-iris-dari-berbagai-sql">
+<section id="mengambil-data-iris-dari-berbagai-sql">
 <h2>Mengambil data iris dari berbagai sql<a class="headerlink" href="#mengambil-data-iris-dari-berbagai-sql" title="Permalink to this heading">#</a></h2>
-<div class="section" id="dari-postgreesql">
+<section id="dari-postgreesql">
 <h3>Dari PostgreeSQL<a class="headerlink" href="#dari-postgreesql" title="Permalink to this heading">#</a></h3>
 <p>Mengambil data dari postgreesql menggunakan psycopg2</p>
 <div class="cell docutils container">
@@ -452,8 +454,8 @@ document.write(`
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="dari-mysql-server">
+</section>
+<section id="dari-mysql-server">
 <h3>Dari Mysql Server<a class="headerlink" href="#dari-mysql-server" title="Permalink to this heading">#</a></h3>
 <p>Mengambil data dari Mysql Server menggunakan mysql.connector</p>
 <div class="cell docutils container">
@@ -494,9 +496,9 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="menggabungkan-data">
+</section>
+</section>
+<section id="menggabungkan-data">
 <h2>Menggabungkan Data<a class="headerlink" href="#menggabungkan-data" title="Permalink to this heading">#</a></h2>
 <p>data yang telah diambil digabungkan menjadi satu data frame menggunakan concat</p>
 <div class="cell docutils container">
@@ -520,8 +522,8 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="membuat-model-pca">
+</section>
+<section id="membuat-model-pca">
 <h2>Membuat Model PCA<a class="headerlink" href="#membuat-model-pca" title="Permalink to this heading">#</a></h2>
 <p>Mereduksi fitur yang awalnya 4 fitur menjadi 2 fitur</p>
 <div class="cell docutils container">
@@ -540,8 +542,8 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="split-data-menggunakan-min-max-scaler">
+</section>
+<section id="split-data-menggunakan-min-max-scaler">
 <h2>Split data menggunakan min max scaler<a class="headerlink" href="#split-data-menggunakan-min-max-scaler" title="Permalink to this heading">#</a></h2>
 <p>menentukan data training dan data testing</p>
 <div class="cell docutils container">
@@ -561,10 +563,10 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="menentukan-model">
+</section>
+<section id="menentukan-model">
 <h2>Menentukan model<a class="headerlink" href="#menentukan-model" title="Permalink to this heading">#</a></h2>
-<div class="section" id="knn-model">
+<section id="knn-model">
 <h3>KNN Model<a class="headerlink" href="#knn-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -591,8 +593,8 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="decision-tree-model">
+</section>
+<section id="decision-tree-model">
 <h3>Decision Tree Model<a class="headerlink" href="#decision-tree-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -619,8 +621,8 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="naive-bayes-model">
+</section>
+<section id="naive-bayes-model">
 <h3>Naive Bayes Model<a class="headerlink" href="#naive-bayes-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -647,9 +649,9 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="hasil-akurasi-dari-ketiga-model">
+</section>
+</section>
+<section id="hasil-akurasi-dari-ketiga-model">
 <h2>Hasil Akurasi dari ketiga Model<a class="headerlink" href="#hasil-akurasi-dari-ketiga-model" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -662,8 +664,8 @@ Mengambil data dari Sql Server menggunakan pyodbc</p>
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
